@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  #mocha
+  .container
+    .row#setup
+      .col-md-6
+        textarea#intro(rows="12", style="width: 100%")
+      .col-md-2
+        button#startBtn.btn.btn-primary Start 
+    .row
+      .col-md-8
+        #test_display(style="height: 200px")
+    .row
+      .col-md-8
+        #test_editor(style="height: 250px")

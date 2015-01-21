@@ -53,7 +53,6 @@ describe('Mailvelope API test', function() {
 
       before(function(done) {
         mailvelope.getKeyring('test@mailvelope.com').then(function(kr) {
-          expect(kr).to.exist;
           keyring = kr;
           done();
         }).catch(done);
@@ -75,8 +74,8 @@ describe('Mailvelope API test', function() {
         }).catch(done);
       });
 
-      it('getKeyInfoForAddress', function(done) {
-        keyring.getKeyInfoForAddress(['test@mailvelope.com']).then(function(result) {
+      it('validKeyForAddress', function(done) {
+        keyring.validKeyForAddress(['test@mailvelope.com']).then(function(result) {
           expect(result).to.exist;
           expect(result).to.eql({'test@mailvelope.com': {}});
           done();
@@ -102,15 +101,24 @@ describe('Mailvelope API test', function() {
 
     describe('createDisplayContainer', function() {
 
+      var keyring = null;
+
+      before(function(done) {
+        mailvelope.getKeyring('test@mailvelope.com').then(function(kr) {
+          keyring = kr;
+          done();
+        }).catch(done);
+      });
+
       it('createDisplayContainer', function(done) {
-        mailvelope.createDisplayContainer('#test_display', pgp_msg).then(function() {
+        mailvelope.createDisplayContainer('#test_display', pgp_msg, keyring).then(function() {
           expect($('#test_display iframe[src*="decryptInline"]').length).to.equal(1);
           done();
         }).catch(done);
       });
 
       it('error armored', function(done) {
-        mailvelope.createDisplayContainer('#test_display', '123').catch(function(err) {
+        mailvelope.createDisplayContainer('#test_display', '123', keyring).catch(function(err) {
           expect(err).to.exist;
           expect(err.code).to.equal('WRONG_ARMORED_TYPE');
           done();
@@ -118,7 +126,7 @@ describe('Mailvelope API test', function() {
       });
 
       it('wrong selector', function(done) {
-        mailvelope.createDisplayContainer('#123', pgp_msg).catch(function(err) {
+        mailvelope.createDisplayContainer('#123', pgp_msg, keyring).catch(function(err) {
           expect(err).to.exist;
           done();
         }).catch(done);
@@ -128,12 +136,21 @@ describe('Mailvelope API test', function() {
 
     describe('createEditorContainer', function() {
 
+      var keyring = null;
+
+      before(function(done) {
+        mailvelope.getKeyring('test@mailvelope.com').then(function(kr) {
+          keyring = kr;
+          done();
+        }).catch(done);
+      });
+
       beforeEach(function() {
         $('#test_editor').empty();
       });
 
       it('createEditorContainer', function(done) {
-        mailvelope.createEditorContainer('#test_editor').then(function(editor) {
+        mailvelope.createEditorContainer('#test_editor', keyring).then(function(editor) {
           expect(editor).to.exist;
           expect($('#test_editor iframe[src*="editor"]').length).to.equal(1);
           done();
@@ -141,7 +158,7 @@ describe('Mailvelope API test', function() {
       });
 
       it('Editor.encrypt', function(done) {
-        mailvelope.createEditorContainer('#test_editor').then(function(editor) {
+        mailvelope.createEditorContainer('#test_editor', keyring).then(function(editor) {
           console.log('editor', editor);
           return editor.encrypt(['test@mailvelope.com']);
         }).then(function(armored) {
@@ -150,35 +167,13 @@ describe('Mailvelope API test', function() {
         }).catch(done);
       });
 
-      it('Editor.encrypt empty recipients array', function(done) {
-        mailvelope.createEditorContainer('#test_editor').then(function(editor) {
-          return editor.encrypt([]);
-        }).catch(function(err) {
-          expect(err).to.exist;
-          expect(err.code).to.equal('NO_RECIPIENTS');
-          done();
-        }).catch(done);
-      });
-
       it('Editor.encrypt encryption in progress', function(done) {
-        mailvelope.createEditorContainer('#test_editor').then(function(editor) {
+        mailvelope.createEditorContainer('#test_editor', keyring).then(function(editor) {
           editor.encrypt(['test@mailvelope.com']);
           return editor.encrypt(['test@mailvelope.com']);
         }).catch(function(err) {
           expect(err).to.exist;
           expect(err.code).to.equal('ENCRYPT_IN_PROGRESS');
-          done();
-        }).catch(done);
-      });
-
-      it('Editor.encrypt call multiple times', function(done) {
-        mailvelope.createEditorContainer('#test_editor').then(function(editor) {
-          return editor.encrypt(['test@mailvelope.com']).then(function(armored) {
-            return editor.encrypt(['test@mailvelope.com']);
-          });
-        }).catch(function(err) {
-          expect(err).to.exist;
-          expect(err.code).to.equal('CALL_LIMIT_EXCEEDED');
           done();
         }).catch(done);
       });

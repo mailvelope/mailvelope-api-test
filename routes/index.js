@@ -6,4 +6,8 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Mailvelope API Test' });
 });
 
+router.get('/manual', function(req, res) {
+  res.render('manual', { title: 'Mailvelope Manual API Test' });
+});
+
 module.exports = router;

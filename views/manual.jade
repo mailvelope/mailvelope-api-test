@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    script(src="javascripts/jquery-2.1.1.min.js")
+    script(src="javascripts/mailvelope-manual-test.js")
+  body
+    .container
+      .row
+        .col-md-6
+          h2 Manual Tests
+        .col-md-2
+          a.btn.btn-default(href="/") Switch to unit tests
+      .row
+        .col-md-2
+          button#clearBtn.btn.btn-default Clear
+        .col-md-2
+          button#initEditorBtn.btn.btn-default Init editor
+      .row
+        .col-md-8
+          h3 Encrypt message:
+      .row
+        .col-md-8
+          #editor_cont(style="height: 350px")
+      .row
+        .col-md-2
+          button#encryptBtn.btn.btn-primary Encrypt
+      .row
+        .col-md-8
+          h3 Decrypt message:
+      .row
+        .col-md-8
+          textarea#armored_msg(rows="12", style="width: 100%")
+      .row
+        .col-md-2
+          button#decryptBtn.btn.btn-primary Decrypt
+      .row
+        .col-md-8
+          h3 Decrypted message in DisplayContainer
+      .row
+        .col-md-8
+          #display_cont(style="height: 350px")

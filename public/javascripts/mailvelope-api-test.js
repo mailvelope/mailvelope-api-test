@@ -5,6 +5,7 @@ mocha.timeout(20000);
 var expect = chai.expect;
 
 var pgp_key;
+var pgp_msg;
 
 $(document).ready(function() {
   $('#startBtn').on('click', function() {
@@ -18,11 +19,12 @@ $(document).ready(function() {
     intro += pgp_key;
     $('#intro').val(intro);
   });
+  $.get('../data/msg.asc', function(msg) {
+    pgp_msg = msg;
+  });
 });
 
 describe('Mailvelope API test', function() {
-
-  var pgp_msg;
 
   before(function(done) {
     if (typeof mailvelope !== 'undefined') {
@@ -30,13 +32,6 @@ describe('Mailvelope API test', function() {
     } else {
       document.addEventListener('mailvelope', done.bind(null, null), false);
     }
-  });
-
-  before(function(done) {
-    $.get('../data/msg.asc', function(msg) {
-      pgp_msg = msg;
-      done();
-    });
   });
 
   describe('Version 1', function() {
@@ -166,7 +161,7 @@ describe('Mailvelope API test', function() {
         }).catch(done);
       });
 
-      it('error armored', function(done) {
+      it('error in armored block', function(done) {
         mailvelope.createDisplayContainer('#test_display', '123', keyring).catch(function(err) {
           expect(err).to.exist;
           expect(err.code).to.equal('WRONG_ARMORED_TYPE');
@@ -236,6 +231,43 @@ describe('Mailvelope API test', function() {
           expect($('#test_display iframe[src*="decryptInline"]').length).to.equal(1);
           done();
         }).catch(done);
+      });
+
+    });
+
+    describe('Type checking', function() {
+
+      var keyring = null;
+
+      before(function(done) {
+        mailvelope.getKeyring('mailvelope').then(function(kr) {
+          keyring = kr;
+          done();
+        }).catch(done);
+      });
+
+      it('wrong selector parameter type', function(done) {
+        mailvelope.createDisplayContainer(new Date(), pgp_msg, keyring).catch(function(err) {
+          expect(err).to.exist;
+          expect(err.code).to.equal('TYPE_MISMATCH');
+          done();
+        });
+      });
+
+      it('wrong armored block parameter type', function(done) {
+        mailvelope.createDisplayContainer('#test_display', {1: 2}, keyring).catch(function(err) {
+          expect(err).to.exist;
+          expect(err.code).to.equal('TYPE_MISMATCH');
+          done();
+        });
+      });
+
+      it('invalid identifier', function(done) {
+        mailvelope.getKeyring('|#|').catch(function(err) {
+          expect(err).to.exist;
+          expect(err.code).to.equal('INVALID_IDENTIFIER');
+          done();
+        });
       });
 
     });

@@ -1,16 +1,30 @@
-extends layout
-
-block content
-  #mocha
-  .container
-    .row#setup
-      .col-md-6
-        textarea#intro(rows="12", style="width: 100%")
-      .col-md-2
-        button#startBtn.btn.btn-primary Start 
-    .row
-      .col-md-8
-        #test_display(style="height: 200px")
-    .row
-      .col-md-8
-        #test_editor(style="height: 250px")
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/mocha.css')
+    script(src="javascripts/jquery-2.1.1.min.js")
+    script(src="javascripts/chai.js")
+    script(src="javascripts/mocha.js")
+    script(src="javascripts/mailvelope-api-test.js")
+  body
+    #mocha
+    .container
+      .row
+        .col-md-6
+          h2 Unit Tests
+      .row#setup
+        .col-md-6
+          textarea#intro(rows="12", style="width: 100%")
+        .col-md-2
+          button#startBtn.btn.btn-primary Start
+      .row
+        .col-md-2.col-md-offset-6
+          a.btn.btn-default(href="/manual") Switch to manual tests
+      .row
+        .col-md-8
+          #test_display(style="height: 200px")
+      .row
+        .col-md-8
+          #test_editor(style="height: 250px")

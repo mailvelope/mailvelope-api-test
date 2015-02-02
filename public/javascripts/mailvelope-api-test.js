@@ -10,17 +10,13 @@ var pgp_msg;
 $(document).ready(function() {
   $('#startBtn').on('click', function() {
     $('#setup').hide();
-    mocha.run();
   });
   $.get('../data/key.asc', function(key) {
     pgp_key = key;
-    var intro = '\n - Import the key below into Mailvelope before the test\n';
-    intro += ' - Add localhost to watchlist with API flag activated\n\n';
-    intro += pgp_key;
-    $('#intro').val(intro);
-  });
-  $.get('../data/msg.asc', function(msg) {
-    pgp_msg = msg;
+    $.get('../data/msg.asc', function(msg) {
+      pgp_msg = msg;
+      mocha.run();
+    });
   });
 });
 
@@ -272,6 +268,10 @@ describe('Mailvelope API test', function() {
 
     });
 
+  });
+
+  after(function() {
+    $('#back').show();
   });
 
 });

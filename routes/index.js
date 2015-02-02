@@ -10,4 +10,8 @@ router.get('/manual', function(req, res) {
   res.render('manual', { title: 'Mailvelope Manual API Test' });
 });
 
+router.get('/unit', function(req, res) {
+  res.render('unit', { title: 'Mailvelope API Unit Test' });
+});
+
 module.exports = router;

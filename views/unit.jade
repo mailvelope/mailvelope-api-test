@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/mocha.css')
+    script(src="javascripts/jquery-2.1.1.min.js")
+    script(src="javascripts/chai.js")
+    script(src="javascripts/mocha.js")
+    script(src="javascripts/mailvelope-api-test.js")
+  body
+    #mocha
+    #nav
+      a#back(href="/", style="display: none;") Back to start page
+    #test_display(style="height: 200px; display: none;")
+    #test_editor(style="height: 250px; display: none;")
+ 

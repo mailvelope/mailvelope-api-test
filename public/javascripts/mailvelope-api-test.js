@@ -76,6 +76,18 @@ describe('Mailvelope API test', function() {
         }).catch(done);
       });
 
+      it('getKeyring after create', function(done) {
+        var randomId = Math.random().toString(36).substr(2, 8);
+        mailvelope.createKeyring(randomId).then(function(kr1) {
+          expect(kr1).to.exist;
+          mailvelope.getKeyring(randomId).then(function(kr2) {
+            expect(kr2).to.exist;
+            expect(kr2.identifier).to.equal(randomId);
+            done();
+          });
+        }).catch(done);
+      });
+
       it('createKeyring - if it does not exist', function(done) {
         mailvelope.getKeyring('test@mailvelope.com').then(function(kr) {
           expect(kr).to.exist;
@@ -131,8 +143,8 @@ describe('Mailvelope API test', function() {
       });
 
       it.skip('importPublicKey', function(done) {
-        keyring.importPublicKey('test@mailvelope.com').then(function(result) {
-          // TODO
+        keyring.importPublicKey(pgp_key).then(function(status) {
+          expect(status).to.equal('UPDATED');
           done();
         }).catch(done);
       });

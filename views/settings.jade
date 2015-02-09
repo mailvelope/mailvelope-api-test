@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    script(src="javascripts/jquery-2.1.1.min.js")
+    script(src="javascripts/mailvelope-manual-test.js")
+  body
+    .container
+      .row
+        .col-md-6
+            h2 Manual Tests
+        .col-md-6
+            a.btn.btn-default(href="/") Back to start page
+      .row
+        .col-md-12
+          iframe(style="height: 350px; width: 100%", src="chrome-extension://fnjdeilgafdgpdoingiekkafedbghheg/common/ui/options.html")
+      .row
+        .col-md-12
+          iframe(style="height: 350px; width: 100%", src="resource://jid1-aqqsmbyb0a8adg-at-jetpack/mailvelope/data/common/ui/options.html")

@@ -12,7 +12,7 @@ function init() {
   $('#clearBtn').on('click', function() {
     $('#editor_cont, #display_cont').empty();
     $('#encryptBtn').off('click');
-    $('#armored_msg, #encryptTime, #decryptTime').val('');
+    $('#armored_msg, #encryptTime, #decryptTime, #armored_key').val('');
     initEditor();
   });
 
@@ -47,6 +47,14 @@ function init() {
     var t0 = performance.now();
     mailvelope.createDisplayContainer('#display_cont', $('#armored_msg').val(), keyring).then(function() {
       $('#decryptTime').val(parseInt(performance.now() - t0));
+    });
+  });
+
+  $('#importBtn').on('click', function() {
+    keyring.importPublicKey($('#armored_key').val()).then(function(status) {
+      $('#importStatus').val(status);
+    }).catch(function(error) {
+      console.log('Import error', error);
     });
   });
 }

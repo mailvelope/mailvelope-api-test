@@ -143,9 +143,12 @@ describe('Mailvelope API test', function() {
       });
 
       it.skip('importPublicKey', function(done) {
-        keyring.importPublicKey(pgp_key).then(function(status) {
-          expect(status).to.equal('UPDATED');
-          done();
+        keyring.exportOwnPublicKey('test@mailvelope.com').then(function(armored) {
+          expect(armored).to.exist;
+          keyring.importPublicKey(armored).then(function(status) {
+            expect(['IMPORTED', 'UPDATED', 'INVALIDATED']).to.contain(status);
+            done();
+          });
         }).catch(done);
       });
 
@@ -211,7 +214,6 @@ describe('Mailvelope API test', function() {
 
       it('Editor.encrypt', function(done) {
         mailvelope.createEditorContainer('#test_editor', keyring).then(function(editor) {
-          console.log('editor', editor);
           return editor.encrypt(['test@mailvelope.com']);
         }).then(function(armored) {
           expect(armored).to.match(/-----BEGIN PGP MESSAGE-----/);

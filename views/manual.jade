@@ -47,3 +47,15 @@ html
       .row
         .col-md-8
           #display_cont(style="height: 350px")
+      .row
+        .col-md-8
+          h3 Import public key:
+      .row
+        .col-md-8
+          textarea#armored_key(rows="12", style="width: 100%")
+      .row
+        .col-md-2
+          button#importBtn.btn.btn-primary Import
+        .col-md-4
+            label Result status:
+            input#importStatus(disabled)

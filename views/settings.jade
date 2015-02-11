@@ -9,12 +9,12 @@ html
     .container
       .row
         .col-md-6
-            h2 Manual Tests
+          h2 Manual Tests
         .col-md-6
-            a.btn.btn-default(href="/") Back to start page
+          a.btn.btn-default(href="/") Back to start page
+          a.btn.btn-default(href="#", id="openSettings") Open Settings
       .row
-        .col-md-12
-          iframe(style="height: 350px; width: 100%", src="chrome-extension://fnjdeilgafdgpdoingiekkafedbghheg/common/ui/options.html")
-      .row
-        .col-md-12
-          iframe(style="height: 350px; width: 100%", src="resource://jid1-aqqsmbyb0a8adg-at-jetpack/mailvelope/data/common/ui/options.html")
+        .col-md-12(id="settings", style="height: 750px; width: 100%")
+      //.row
+        //.col-md-12
+         //iframe(style="height: 350px; width: 100%", src="1chrome-extension://fnjdeilgafdgpdoingiekkafedbghheg/common/ui/options.html")

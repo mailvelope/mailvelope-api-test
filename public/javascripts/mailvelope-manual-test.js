@@ -59,4 +59,9 @@ function init() {
       console.log('Import error', error);
     });
   });
+
+  $('#openSettings').on('click', function() {
+    $('#settings').empty();
+    mailvelope.createSettingsContainer('#settings', keyring);
+  });
 }

@@ -31,7 +31,9 @@ function init() {
   });
 
   function initEditor() {
-    mailvelope.createEditorContainer('#editor_cont', keyring).then(function(editor) {
+    mailvelope.createEditorContainer('#editor_cont', keyring, {
+      predefinedText: 'This is a predefined text as in options.predefined'
+    }).then(function(editor) {
       $('#encryptBtn').on('click', function() {
         var t0 = performance.now();
         editor.encrypt(['test@mailvelope.com']).then(function(armored) {

@@ -31,14 +31,18 @@ function init() {
   });
 
   function initEditor() {
-    mailvelope.createEditorContainer('#editor_cont', keyring, {
-      predefinedText: 'This is a predefined text as in options.predefined'
-    }).then(function(editor) {
-      $('#encryptBtn').on('click', function() {
-        var t0 = performance.now();
-        editor.encrypt(['test@mailvelope.com']).then(function(armored) {
-          $('#encryptTime').val(parseInt(performance.now() - t0));
-          $('#armored_msg').val(armored);
+    $.get('../data/msg.asc', function(msg) {
+      mailvelope.createEditorContainer('#editor_cont', keyring, {
+        predefinedText: 'This is a predefined text as in options.predefined',
+        quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
+        quotedMail: msg
+      }).then(function(editor) {
+        $('#encryptBtn').on('click', function() {
+          var t0 = performance.now();
+          editor.encrypt(['test@mailvelope.com']).then(function(armored) {
+            $('#encryptTime').val(parseInt(performance.now() - t0));
+            $('#armored_msg').val(armored);
+          });
         });
       });
     });

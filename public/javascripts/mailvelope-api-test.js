@@ -152,6 +152,14 @@ describe('Mailvelope API test', function() {
         }).catch(done);
       });
 
+      it('setLogo', function(done) {
+        var logoRev = keyring.logoRev;
+        keyring.setLogo('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAB==', logoRev + 1).then(function() {
+          expect(keyring.logoRev).to.equal(logoRev + 1);
+          done();
+        }).catch(done);
+      });
+
     });
 
     describe('createDisplayContainer', function() {

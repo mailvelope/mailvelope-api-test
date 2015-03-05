@@ -26,16 +26,18 @@ describe('Mailvelope API test', function() {
     if (typeof mailvelope !== 'undefined') {
       done();
     } else {
-      document.addEventListener('mailvelope', done.bind(null, null), false);
+      window.addEventListener('mailvelope', done.bind(null, null), false);
     }
   });
 
   describe('Version 1', function() {
 
-    it('getVersion', function() {
-      var version = mailvelope.getVersion();
-      expect(version).to.exist;
-      expect(/\d\.\d{1, 2}.\d{1, 2}/.test(version)).to.exist;
+    it('getVersion', function(done) {
+      mailvelope.getVersion().then(function(version) {
+        expect(version).to.exist;
+        expect(/\d\.\d{1,2}\.\d{1,2}(b\d)?/.test(version)).to.be.true;
+        done();
+      }).catch(done);
     });
 
     describe('Keyring', function() {

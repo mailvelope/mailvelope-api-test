@@ -3,7 +3,7 @@ $(document).ready(function() {
   if (typeof mailvelope !== 'undefined') {
     init();
   } else {
-    document.addEventListener('mailvelope', init, false);
+    window.addEventListener('mailvelope', init, false);
   }
 });
 

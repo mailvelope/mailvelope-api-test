@@ -25,7 +25,7 @@ function init() {
 
   var keyring = null;
 
-  mailvelope.getKeyring('mailvelope').then(function(kr) {
+  mailvelope.getKeyring('test.user').then(function(kr) {
     keyring = kr;
     initEditor();
   });
@@ -35,7 +35,8 @@ function init() {
       mailvelope.createEditorContainer('#editor_cont', keyring, {
         predefinedText: 'This is a predefined text as in options.predefined',
         quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
-        quotedMail: msg
+        quotedMail: msg,
+        quota: 32*1024*1024
       }).then(function(editor) {
         $('#encryptBtn').on('click', function() {
           var t0 = performance.now();
@@ -64,8 +65,4 @@ function init() {
     });
   });
 
-  $('#openSettings').on('click', function() {
-    $('#settings').empty();
-    mailvelope.createSettingsContainer('#settings', keyring);
-  });
 }

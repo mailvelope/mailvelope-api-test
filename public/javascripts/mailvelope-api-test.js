@@ -43,26 +43,19 @@ describe('Mailvelope API test', function() {
     describe('Keyring', function() {
 
       var keyring = null;
+      var randomId = Math.random().toString(36).substr(2, 8);
 
-      before(function(done) {
-        mailvelope.getKeyring('mailvelope').then(function(kr) {
+      it('getKeyring', function(done) {
+        mailvelope.getKeyring('test.user').then(function(kr) {
           expect(kr).to.exist;
           keyring = kr;
           done();
         }).catch(done);
       });
 
-      it('getKeyring', function(done) {
-        mailvelope.getKeyring('mailvelope').then(function(kr) {
-          expect(kr).to.exist;
-          done();
-        }).catch(done);
-      });
-
       it('getKeyring - no keyring found error', function(done) {
-        mailvelope.getKeyring('bob@mailvelope.com').then(function(kr) {
-          expect(kr).to.not.exist;
-          done();
+        mailvelope.getKeyring(randomId).then(function(kr) {
+          throw new Error('Should not enter then method.');
         }).catch(function(err) {
           expect(err).to.exist;
           expect(err.code).to.equal('NO_KEYRING_FOR_ID');
@@ -70,33 +63,13 @@ describe('Mailvelope API test', function() {
         });
       });
 
-      it('createKeyring', function(done) {
-        var randomId = Math.random().toString(36).substr(2, 8);
-        mailvelope.createKeyring(randomId).then(function(kr) {
-          expect(kr).to.exist;
-          done();
-        }).catch(done);
-      });
-
-      it('getKeyring after create', function(done) {
-        var randomId = Math.random().toString(36).substr(2, 8);
-        mailvelope.createKeyring(randomId).then(function(kr1) {
-          expect(kr1).to.exist;
-          mailvelope.getKeyring(randomId).then(function(kr2) {
-            expect(kr2).to.exist;
-            expect(kr2.identifier).to.equal(randomId);
-            done();
-          });
-        }).catch(done);
-      });
-
       it('createKeyring - if it does not exist', function(done) {
-        mailvelope.getKeyring('test@mailvelope.com').then(function(kr) {
+        mailvelope.getKeyring('bob@mailvelope.com').then(function(kr) {
           expect(kr).to.exist;
           done();
         }, function(err) {
           if (err.code === 'NO_KEYRING_FOR_ID') {
-            mailvelope.createKeyring('test@mailvelope.com').then(function(kr) {
+            mailvelope.createKeyring('bob@mailvelope.com').then(function(kr) {
               expect(kr).to.exist;
               done();
             });
@@ -107,9 +80,8 @@ describe('Mailvelope API test', function() {
       });
 
       it('createKeyring - id already exists error', function(done) {
-        mailvelope.createKeyring('test@mailvelope.com').then(function(kr) {
-          expect(kr).to.not.exist;
-          done();
+        mailvelope.createKeyring('bob@mailvelope.com').then(function(kr) {
+          throw new Error('Should not enter then method.');
         }).catch(function(err) {
           expect(err).to.exist;
           expect(err.code).to.equal('KEYRING_ALREADY_EXISTS');
@@ -135,8 +107,7 @@ describe('Mailvelope API test', function() {
 
       it('exportOwnPublicKey - no key for this address error', function(done) {
         keyring.exportOwnPublicKey('abc@mailvelope.com').then(function(armored) {
-          expect(armored).to.not.exist;
-          done();
+          throw new Error('Should not enter then method.');
         }).catch(function(err) {
           expect(err).to.exist;
           expect(err.code).to.equal('NO_KEY_FOR_ADDRESS');
@@ -156,10 +127,21 @@ describe('Mailvelope API test', function() {
 
       it('setLogo', function(done) {
         var logoRev = keyring.logoRev;
-        keyring.setLogo('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAB==', logoRev + 1).then(function() {
+        keyring.setLogo('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAABgCAIAAABaGO0eAAAAnklEQVR42u3RAQ0AMAjAsHMN2EYHNpFBQjoJa2TX017fAgAABACAAAAQAAACAEAAAAgAAAEAIAAABACAAAAQAAACAEAAAAgAAAEAIAAABACAAAAQAAACAEAAAAgAAAEAIAAABACAAAAQAAACAEAAAAgAAAEAAEAAAAgAAAEAIAAABACAAAAQAAACAEAAAAgAAAEAIAAABACAAAAQgAsNulgCCPJ2zM0AAAAASUVORK5CYII=', logoRev + 1).then(function() {
           expect(keyring.logoRev).to.equal(logoRev + 1);
           done();
         }).catch(done);
+      });
+
+      it.skip('setLogo - wrong revision', function(done) {
+        var logoRev = keyring.logoRev;
+        keyring.setLogo('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHUAAABg', logoRev).then(function() {
+          throw new Error('Should not enter then method.');
+        }).catch(function(err) {
+          expect(err).to.exist;
+          expect(err.code).to.equal('REVISION_INVALID');
+          done();
+        });
       });
 
     });
@@ -169,7 +151,7 @@ describe('Mailvelope API test', function() {
       var keyring = null;
 
       before(function(done) {
-        mailvelope.getKeyring('mailvelope').then(function(kr) {
+        mailvelope.getKeyring('test.user').then(function(kr) {
           keyring = kr;
           done();
         }).catch(done);
@@ -204,7 +186,7 @@ describe('Mailvelope API test', function() {
       var keyring = null;
 
       before(function(done) {
-        mailvelope.getKeyring('mailvelope').then(function(kr) {
+        mailvelope.getKeyring('test.user').then(function(kr) {
           keyring = kr;
           done();
         }).catch(done);
@@ -260,7 +242,7 @@ describe('Mailvelope API test', function() {
       var keyring = null;
 
       before(function(done) {
-        mailvelope.getKeyring('mailvelope').then(function(kr) {
+        mailvelope.getKeyring('test.user').then(function(kr) {
           keyring = kr;
           done();
         }).catch(done);

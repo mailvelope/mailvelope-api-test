@@ -11,8 +11,8 @@ function init() {
 
   $('#openSettings').on('click', function() {
     $('#settings').empty();
-    mailvelope.getKeyring('mailvelope').then(function(keyring) {
-      mailvelope.createSettingsContainer('#settings', keyring, {email: "john.smith@test.com", fullName: "John Smith"});
+    mailvelope.createKeyring('test@gmx.de-mail.de').then(function(keyring) {
+      mailvelope.createSettingsContainer('#settings', keyring, {email: "test@gmx.de-mail.de", fullName: "John Smith"});
     });
   });
 

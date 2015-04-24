@@ -36,7 +36,7 @@ function init() {
         predefinedText: 'This is a predefined text as in options.predefined',
         quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
         quotedMail: msg,
-        quota: 32*1024*1024
+        quota: 25 * 1024
       }).then(function(editor) {
         $('#encryptBtn').on('click', function() {
           var t0 = performance.now();

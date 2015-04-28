@@ -65,4 +65,16 @@ function init() {
     });
   });
 
+  $('#keyGenGeneratorBtn').on('click', function() {
+    mailvelope.createKeyGenContainer('#generator_cont', keyring, {})
+      .then(function(generator) {
+
+        generator.generate('test@test.de', 'TestName');
+        console.log('keyGen generate success');
+      })
+      .catch(function (error) {
+        console.log('keyGen generate error', error);
+      });
+  })
+
 }

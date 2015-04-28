@@ -3,59 +3,59 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="javascripts/jquery-2.1.1.min.js")
     script(src="javascripts/mailvelope-manual-test.js")
   body
     .container
       .row
-        .col-md-6
+        .col-sm-8
           h2 Manual Tests
-        .col-md-2
-          a.btn.btn-default(href="/") Back to start page
-      .row
-        .col-md-2
+        .col-sm-4
+          p.text-right
+            a.btn.btn-default(href="/") Back to start page
+
+      p
+        .btn-group
           button#clearBtn.btn.btn-default Clear
-        .col-md-2
           button#initEditorBtn.btn.btn-default Init editor
-      .row
-        .col-md-8
-          h3 Encrypt message:
-      .row
-        .col-md-8
-          #editor_cont(style="height: 350px")
-      .row
-        .col-md-2
-          button#encryptBtn.btn.btn-primary Encrypt
-        .col-md-4
-            label Time in (ms):
-            input#encryptTime(disabled)
-      .row
-        .col-md-8
-          h3 Decrypt message:
-      .row
-        .col-md-8
-          textarea#armored_msg(rows="12", style="width: 100%")
-      .row
-        .col-md-2
-          button#decryptBtn.btn.btn-primary Decrypt
-        .col-md-4
-            label Time in (ms):
-            input#decryptTime(disabled)
-      .row
-        .col-md-8
-          h3 Decrypted message in DisplayContainer
-      .row
-        .col-md-8
+
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title Encrypt message:
+        .panel-body
+          #editor_cont(style="height: 350px;margin-bottom:1em")
+          .form-group
+            .input-group
+              span.input-group-btn
+                button#encryptBtn.btn.btn-primary Encrypt
+              span.input-group-addon Time in (ms):
+              input#encryptTime(disabled).form-control
+        .panel-heading
+          h3.panel-title Decrypt message:
+        .panel-body
+          .form-group
+            textarea#armored_msg(rows="12", style="width: 100%").form-control
+          .form-group
+            .input-group
+              span.input-group-btn
+                button#decryptBtn.btn.btn-primary Decrypt
+              span.input-group-addon Time in (ms):
+              input#decryptTime(disabled).form-control
+        .panel-heading
+          h3.panel-title Decrypted message in DisplayContainer
+        .panel-body
           #display_cont(style="height: 350px")
-      .row
-        .col-md-8
-          h3 Import public key:
-      .row
-        .col-md-8
-          textarea#armored_key(rows="12", style="width: 100%")
-      .row
-        .col-md-2
-          button#importBtn.btn.btn-primary Import
-        .col-md-4
-            label Result status:
-            input#importStatus(disabled)
+
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title Import public key:
+        .panel-body
+          .form-group
+            textarea#armored_key(rows="12", style="width: 100%").form-control
+          .form-group
+            .input-group
+              span.input-group-btn
+                button#importBtn.btn.btn-primary Import
+              span.input-group-addon Result status:
+              input#importStatus(disabled).form-control

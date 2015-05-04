@@ -62,8 +62,10 @@ html
 
       .panel.panel-default
         .panel-heading
-          h3.panel-title KeyGen Generator:
+          h3.panel-title KeyGen &amp; PrivateKeyBackup Generator:
         .panel-body
-          #generator_cont(style="height: 350px;margin-bottom:1em")
+          #private_key_backup_cont(style="height: 350px;margin-bottom:1em")
         .panel-footer
-          button#keyGenGeneratorBtn.btn.btn-primary KeyGenGenerator
+          .btn-group(role=group)
+            button#KeyGenGeneratorBtn.btn.btn-primary create KeyGen Container
+            button#nextBackupGeneratorBtn.btn(disabled) weiter

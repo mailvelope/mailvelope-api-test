@@ -65,15 +65,41 @@ function init() {
     });
   });
 
-  $('#keyGenGeneratorBtn').on('click', function() {
-    mailvelope.createKeyGenContainer('#generator_cont', keyring, {})
-      .then(function(generator) {
+  $('#KeyGenGeneratorBtn').on('click', function() {
+    var that = this,
+      options = {
+        email: '',
+        name: '',
+        algo: '',
+        length: '',
+        exired: ''
+      };
 
-        generator.generate('test@test.de', 'TestName');
-        console.log('keyGen generate success');
+    keyring.createKeyGenContainer('#private_key_backup_cont', keyring, options)
+      .then(function(generator) {
+        console.log('keyring.createKeyGenContainer success', generator);
+
+        var $nextBtn = $('#nextBackupGeneratorBtn')
+          .removeAttr('disabled')
+          .addClass('btn-success')
+          .on('click', function(evt) {
+            console.log('#nextBackupGeneratorBtn click');
+
+            var options = {};
+
+            generator.generate(options)
+              .then(function(result) {
+                console.log('generator.generate success', result);
+              })
+              .catch(function(error) {
+                console.log('generator.generate error', error);
+              });
+          });
+
+        $(that).parent().append($nextBtn);
       })
-      .catch(function (error) {
-        console.log('keyGen generate error', error);
+      .catch(function(error) {
+        console.log('keyring.createKeyGenContainer error', error);
       });
   })
 

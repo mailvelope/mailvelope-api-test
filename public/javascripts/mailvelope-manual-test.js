@@ -65,7 +65,27 @@ function init() {
     });
   });
 
-  $('#KeyGenGeneratorBtn').on('click', function() {
+  var createKeyBackupContainerBtn = function() {
+    console.log('#createKeyBackupContainerBtn click');
+    var options = {};
+    keyring.createKeyBackupContainer('#private_key_backup_cont', keyring, options)
+      .then(function(popup) {
+        console.log('keyring.createKeyBackupContainer success', popup);
+
+        popup.done()
+          .then(function(result) {
+            console.log('popup.done success', result);
+          })
+          .catch(function(error) {
+            console.log('popup.done error', error);
+          });
+      })
+      .catch(function(error) {
+        console.log('keyring.createKeyBackupContainer error', error);
+      });
+  };
+
+  $('#createKeyGenGeneratorBtn').on('click', function() {
     var that = this,
       options = {
         email: '',
@@ -79,28 +99,27 @@ function init() {
       .then(function(generator) {
         console.log('keyring.createKeyGenContainer success', generator);
 
-        var $nextBtn = $('#nextBackupGeneratorBtn')
+        $('#generateGeneratorBtn')
           .removeAttr('disabled')
           .addClass('btn-success')
-          .on('click', function(evt) {
-            console.log('#nextBackupGeneratorBtn click');
-
+          .on('click', function() {
             var options = {};
 
             generator.generate(options)
               .then(function(result) {
                 console.log('generator.generate success', result);
+
+                createKeyBackupContainerBtn();
               })
               .catch(function(error) {
                 console.log('generator.generate error', error);
               });
           });
-
-        $(that).parent().append($nextBtn);
       })
       .catch(function(error) {
         console.log('keyring.createKeyGenContainer error', error);
       });
-  })
+  });
 
+  $('#createKeyBackupContainerBtn').on('click', createKeyBackupContainerBtn);
 }

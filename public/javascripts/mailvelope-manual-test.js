@@ -90,9 +90,7 @@ function init() {
       options = {
         email: '',
         name: '',
-        algo: '',
-        length: '',
-        exired: ''
+        length: ''
       };
 
     keyring.createKeyGenContainer('#private_key_backup_cont', keyring, options)
@@ -108,8 +106,6 @@ function init() {
             generator.generate(options)
               .then(function(result) {
                 console.log('generator.generate success', result);
-
-                createKeyBackupContainerBtn();
               })
               .catch(function(error) {
                 console.log('generator.generate error', error);

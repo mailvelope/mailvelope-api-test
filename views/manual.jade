@@ -70,3 +70,17 @@ html
             button#createKeyGenGeneratorBtn.btn.btn-primary create KeyGen Container
             button#generateGeneratorBtn.btn(disabled) generate
             button#createKeyBackupContainerBtn.btn.btn-default create Backup
+
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title Check if keyring has private key for given fingerprint:
+        .panel-body
+          .alert.alert-info(role=alert) Copy the fingerprint from your mailvelope extension
+          .form-group
+            label.control-label Fingerprint
+            input#fingerprintInput(placeholder="Fingerprint without spaces").form-control
+          .form-group
+            output#hasPrivateKey_cont.form-control
+        .panel-footer
+          .btn-group(role=group)
+            button#hasPrivateKeyBtn.btn.btn-success Check

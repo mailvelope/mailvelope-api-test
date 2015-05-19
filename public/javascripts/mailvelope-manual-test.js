@@ -117,4 +117,18 @@ function init() {
       });
   });
 
+  $('#hasPrivateKeyBtn').on('click', function() {
+    var fingerprint = $('#fingerprintInput').val();
+
+    keyring.hasPrivateKey(fingerprint)
+      .then(function(result) {
+        console.log('keyring.hasPrivateKey success', result);
+        if (result) {
+          $('#hasPrivateKey_cont').html('TRUE');
+        } else {
+          $('#hasPrivateKey_cont').html('FALSE');
+        }
+      })
+  });
+
 }

@@ -88,9 +88,9 @@ function init() {
   $('#createKeyGenGeneratorBtn').on('click', function() {
     var that = this,
       options = {
-        email: '',
-        name: '',
-        length: ''
+        email: 'test@mailvelope.com',
+        fullName: 'Generated on ' + (new Date()).toLocaleString(),
+        length: 2048
       };
 
     keyring.createKeyGenContainer('#private_key_backup_cont', keyring, options)
@@ -101,9 +101,8 @@ function init() {
           .removeAttr('disabled')
           .addClass('btn-success')
           .on('click', function() {
-            var options = {};
 
-            generator.generate(options)
+            generator.generate()
               .then(function(result) {
                 console.log('generator.generate success', result);
               })

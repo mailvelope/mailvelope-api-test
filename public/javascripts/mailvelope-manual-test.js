@@ -72,12 +72,13 @@ function init() {
       .then(function(popup) {
         console.log('keyring.createKeyBackupContainer success', popup);
 
-        popup.done()
+        popup.isReady()
           .then(function(result) {
-            console.log('popup.done success', result);
+            console.log('popup.isReady success', result);
+            $('#private_key_backup_cont').empty();
           })
           .catch(function(error) {
-            console.log('popup.done error', error);
+            console.log('popup.isReady error', error);
           });
       })
       .catch(function(error) {
@@ -105,6 +106,7 @@ function init() {
             generator.generate()
               .then(function(result) {
                 console.log('generator.generate success', result);
+                $('#private_key_backup_cont').empty();
               })
               .catch(function(error) {
                 console.log('generator.generate error', error);

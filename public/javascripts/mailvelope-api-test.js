@@ -92,7 +92,13 @@ describe('Mailvelope API test', function() {
       it('validKeyForAddress', function(done) {
         keyring.validKeyForAddress(['test@mailvelope.com']).then(function(result) {
           expect(result).to.exist;
-          expect(result).to.eql({'test@mailvelope.com': {}});
+          var found = false;
+          result['test@mailvelope.com'].keys.forEach(function(key) {
+            if (key.fingerprint === 'aa1e01774bdf7d76a45bdc2df11db1250c3c3f1b') {
+              found = true;
+            }
+          });
+          expect(found).to.be.true;
           done();
         }).catch(done);
       });

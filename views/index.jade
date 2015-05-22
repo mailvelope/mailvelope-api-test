@@ -9,16 +9,16 @@ html
   body
     #mocha
     .container
-      .row
-        .col-md-6
-          h2 Mailvelope Client API Tests
-      .row#setup
-        .col-md-6
-          textarea#intro(rows="12", style="width: 100%")
-      .row
-        .col-md-2
-          a#startBtn.btn.btn-primary.disabled(href="/unit") Start unit tests
-        .col-md-2
-          a.btn.btn-default(href="/manual") Switch to manual tests
-        .col-md-2
-          a.btn.btn-default(href="/settings") Open Settings
+      h2 Mailvelope Client API Tests
+
+      .panel.panel-default#setup
+        .panel-heading
+          h3.panel-title Automatic Unit test
+        .panel-body
+          .form-group
+            textarea#intro.form-control(rows="12", style="width: 100%")
+        .panel-footer
+          .btn-group(role=group)
+            a#startBtn.btn.btn-primary(href="/unit") Start unit tests
+            a.btn.btn-default(href="/manual") Switch to manual tests
+            a.btn.btn-default(href="/settings") Open Settings

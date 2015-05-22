@@ -5,6 +5,7 @@ html
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="javascripts/jquery-2.1.1.min.js")
+    script(src="javascripts/bootstrap.min.js")
     script(src="javascripts/mailvelope-manual-test.js")
   body
     .container
@@ -24,11 +25,26 @@ html
         .panel-heading
           h3.panel-title Encrypt message:
         .panel-body
-          #editor_cont(style="height: 350px;margin-bottom:1em")
+          ul.nav.nav-tabs(role="tablist")
+            li.active(role="presentation")
+              a(href="#signEmail" aria-controls="signEmail" role="tab" data-toggle="tab") sign and encrypt
+            li(role="presentation")
+              a(href="#notSignEmail" aria-controls="notSignEmail" role="tab" data-toggle="tab") only encrypt
+
+          div.tab-content
+            div.tab-pane.active#signEmail
+              #signEditorCont(style="height: 350px;margin-bottom:1em")
+              .form-group
+                button#signEncryptBtn.btn.btn-primary Encrypt
+
+            div.tab-pane#notSignEmail
+              #notSignEditorCont(style="height: 350px;margin-bottom:1em")
+              .form-group
+                button#notSignEncryptBtn.btn.btn-danger Encrypt
+
+        .panel-footer
           .form-group
             .input-group
-              span.input-group-btn
-                button#encryptBtn.btn.btn-primary Encrypt
               span.input-group-addon Time in (ms):
               input#encryptTime(disabled).form-control
         .panel-heading

@@ -23,6 +23,15 @@ function init() {
     initEditor();
   });
 
+  $('.panel .nav-tabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show')
+  });
+
+  $(function () {
+    $('[data-toggle=tooltip]').tooltip()
+  });
+
   var keyring = null;
 
   mailvelope.getKeyring('test.user').then(function(kr) {
@@ -82,13 +91,31 @@ function init() {
 
   function initEditor() {
     $.get('../data/msg.asc', function(msg) {
-      mailvelope.createEditorContainer('#editor_cont', keyring, {
+      mailvelope.createEditorContainer('#signEditorCont', keyring, {
         predefinedText: 'This is a predefined text as in options.predefined',
         quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
         quotedMail: msg,
-        quota: 25 * 1024
+        quota: 25 * 1024,
+        signMsg: true
       }).then(function(editor) {
-        $('#encryptBtn').on('click', function() {
+        $('#signEncryptBtn').on('click', function() {
+          console.log('signEncryptBtn click');
+          var t0 = performance.now();
+          editor.encrypt(['test@mailvelope.com']).then(function(armored) {
+            $('#encryptTime').val(parseInt(performance.now() - t0));
+            $('#armored_msg').val(armored);
+          });
+        });
+      });
+      mailvelope.createEditorContainer('#notSignEditorCont', keyring, {
+        predefinedText: 'This is a predefined text as in options.predefined',
+        quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
+        quotedMail: msg,
+        quota: 25 * 1024,
+        signMsg: false
+      }).then(function(editor) {
+        $('#notSignEncryptBtn').on('click', function() {
+          console.log('notSignEncryptBtn click');
           var t0 = performance.now();
           editor.encrypt(['test@mailvelope.com']).then(function(armored) {
             $('#encryptTime').val(parseInt(performance.now() - t0));

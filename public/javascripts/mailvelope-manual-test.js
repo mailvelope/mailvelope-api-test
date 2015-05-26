@@ -65,34 +65,12 @@ function init() {
     });
   });
 
-  var createKeyBackupContainerBtn = function() {
-    console.log('#createKeyBackupContainerBtn click');
-    var options = {};
-    keyring.createKeyBackupContainer('#private_key_backup_cont', keyring, options)
-      .then(function(popup) {
-        console.log('keyring.createKeyBackupContainer success', popup);
-
-        popup.isReady()
-          .then(function(result) {
-            console.log('popup.isReady success', result);
-            $('#private_key_backup_cont').empty();
-          })
-          .catch(function(error) {
-            console.log('popup.isReady error', error);
-          });
-      })
-      .catch(function(error) {
-        console.log('keyring.createKeyBackupContainer error', error);
-      });
-  };
-
   $('#createKeyGenGeneratorBtn').on('click', function() {
-    var that = this,
-      options = {
-        email: 'test@mailvelope.com',
-        fullName: 'Generated on ' + (new Date()).toLocaleString(),
-        length: 2048
-      };
+    var options = {
+      email: 'test@mailvelope.com',
+      fullName: 'Generated on ' + (new Date()).toLocaleString(),
+      length: 2048
+    };
 
     keyring.createKeyGenContainer('#private_key_backup_cont', keyring, options)
       .then(function(generator) {
@@ -118,5 +96,25 @@ function init() {
       });
   });
 
-  $('#createKeyBackupContainerBtn').on('click', createKeyBackupContainerBtn);
+  $('#createKeyBackupContainerBtn').on('click', function() {
+    console.log('#createKeyBackupContainerBtn click');
+    var options = {};
+    keyring.createKeyBackupContainer('#private_key_backup_cont', keyring, options)
+      .then(function(popup) {
+        console.log('keyring.createKeyBackupContainer success', popup);
+
+        popup.isReady()
+          .then(function(result) {
+            console.log('popup.isReady success', result);
+            $('#private_key_backup_cont').empty();
+          })
+          .catch(function(error) {
+            console.log('popup.isReady error', error);
+          });
+      })
+      .catch(function(error) {
+        console.log('keyring.createKeyBackupContainer error', error);
+      });
+  });
+
 }

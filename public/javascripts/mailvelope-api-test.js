@@ -150,6 +150,33 @@ describe('Mailvelope API test', function() {
         });
       });
 
+      it('addSyncHandler', function(done) {
+
+        var syncHandlerObj = {
+          uploadSync: function(syncObj) {
+            console.log('callback', syncObj);
+          },
+
+          downloadSync: function(syncObj) {
+            console.log('downloadSync callback', syncObj);
+          },
+
+          backup: function(syncObj) {
+            console.log('backup callback', syncObj);
+          },
+
+          restore: function() {
+            consoloe.log('restore callback');
+          }
+        };
+
+        keyring.addSyncHandler(syncHandlerObj)
+          .then(function(result) {
+            expect(result).to.exist();
+            done();
+          })
+          .catch(done);
+      });
     });
 
     describe('createDisplayContainer', function() {

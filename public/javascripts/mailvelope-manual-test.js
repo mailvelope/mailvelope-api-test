@@ -131,4 +131,14 @@ function init() {
       })
   });
 
+  $('#openSettingsBtn').on('click', function() {
+    keyring.openSettings()
+      .then(function(result) {
+        console.log('keyring.openSettings() success', result);
+      })
+      .catch(function(error) {
+        console.log('keyring.openSettings() error', error);
+      })
+  });
+
 }

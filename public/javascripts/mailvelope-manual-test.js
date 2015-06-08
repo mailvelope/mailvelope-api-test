@@ -72,7 +72,7 @@ function init() {
       length: 2048
     };
 
-    keyring.createKeyGenContainer('#private_key_backup_cont', keyring, options)
+    keyring.createKeyGenContainer('#private_key_backup_cont', options)
       .then(function(generator) {
         console.log('keyring.createKeyGenContainer success', generator);
 
@@ -99,7 +99,7 @@ function init() {
   $('#createKeyBackupContainerBtn').on('click', function() {
     console.log('#createKeyBackupContainerBtn click');
     var options = {};
-    keyring.createKeyBackupContainer('#private_key_backup_cont', keyring, options)
+    keyring.createKeyBackupContainer('#private_key_backup_cont', options)
       .then(function(popup) {
         console.log('keyring.createKeyBackupContainer success', popup);
 

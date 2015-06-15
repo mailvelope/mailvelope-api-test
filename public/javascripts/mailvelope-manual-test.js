@@ -99,6 +99,35 @@ function init() {
   $('#createKeyBackupContainerBtn').on('click', function() {
     console.log('#createKeyBackupContainerBtn click');
     var options = {};
+
+    $('#private_key_backup_cont').empty();
+
+    keyring.createKeyBackupContainer('#private_key_backup_cont', options)
+      .then(function(popup) {
+        console.log('keyring.createKeyBackupContainer success', popup);
+
+        popup.isReady()
+          .then(function(result) {
+            console.log('popup.isReady success', result);
+            $('#private_key_backup_cont').empty();
+          })
+          .catch(function(error) {
+            console.log('popup.isReady error', error);
+          });
+      })
+      .catch(function(error) {
+        console.log('keyring.createKeyBackupContainer error', error);
+      });
+
+  });
+  $('#recreateKeyBackupContainerBtn').on('click', function() {
+    console.log('#recreateKeyBackupContainerBtn click');
+    var options = {
+      initialSetup: false
+    };
+
+    $('#private_key_backup_cont').empty();
+
     keyring.createKeyBackupContainer('#private_key_backup_cont', options)
       .then(function(popup) {
         console.log('keyring.createKeyBackupContainer success', popup);

@@ -69,7 +69,7 @@ function init() {
     var options = {
       email: 'test@mailvelope.com',
       fullName: 'Generated on ' + (new Date()).toLocaleString(),
-      length: 2048
+      keySize: 2048
     };
 
     keyring.createKeyGenContainer('#private_key_backup_cont', options)

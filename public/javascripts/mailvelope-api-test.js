@@ -297,6 +297,14 @@ describe('Mailvelope API test', function() {
         });
       });
 
+      it('invalid keyring type', function(done) {
+        mailvelope.createDisplayContainer('#test_display', pgp_msg, '123').catch(function(err) {
+          expect(err).to.exist;
+          expect(err.code).to.equal('TYPE_MISMATCH');
+          done();
+        });
+      });
+
       it('invalid identifier', function(done) {
         mailvelope.getKeyring('|#|').catch(function(err) {
           expect(err).to.exist;

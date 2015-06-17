@@ -30,6 +30,56 @@ function init() {
     initEditor();
   });
 
+  var keyBackup = null;
+
+  var syncHandlerObj = {
+    /**
+     * upload the private key backup on the backend server
+     * @param syncObj
+     */
+    uploadSync: function(syncObj) {
+      console.log('callback', syncObj);
+      return new Promise(function(resolve, reject) {
+        resolve({});
+      });
+    },
+
+    /**
+     * download the private key backup from the backend server
+     * @param syncObj
+     */
+    downloadSync: function(syncObj) {
+      console.log('downloadSync callback', syncObj);
+      return new Promise(function(resolve, reject) {
+        resolve({});
+      });
+    },
+
+    /**
+     *
+     * @param syncObj
+     */
+    backup: function(syncObj) {
+      console.log('backup callback', syncObj);
+      return new Promise(function(resolve, reject) {
+        resolve({});
+      });
+    },
+
+    /**
+     * get the private key backup from the backend server
+     */
+    restore: function() {
+      return new Promise(function(resolve, reject) {
+        if (keyBackup) {
+          resolve(keyBackup);
+        } else {
+          reject(new Error('No key backup available.'));
+        }
+      });
+    }
+  };
+
   function initEditor() {
     $.get('../data/msg.asc', function(msg) {
       mailvelope.createEditorContainer('#editor_cont', keyring, {
@@ -66,6 +116,10 @@ function init() {
   });
 
   $('#createKeyGenGeneratorBtn').on('click', function() {
+    console.log('#createKeyGenGeneratorBtn click');
+
+    $('#private_key_backup_cont').empty();
+
     var options = {
       email: 'test@mailvelope.com',
       fullName: 'Generated on ' + (new Date()).toLocaleString(),
@@ -98,6 +152,9 @@ function init() {
 
   $('#createKeyBackupContainerBtn').on('click', function() {
     console.log('#createKeyBackupContainerBtn click');
+
+    $('#private_key_backup_cont').empty();
+
     var options = {};
 
     $('#private_key_backup_cont').empty();
@@ -109,10 +166,12 @@ function init() {
         popup.isReady()
           .then(function(result) {
             console.log('popup.isReady success', result);
+            keyBackup = result;
             $('#private_key_backup_cont').empty();
           })
           .catch(function(error) {
             console.log('popup.isReady error', error);
+            keyBackup = null;
           });
       })
       .catch(function(error) {
@@ -135,14 +194,53 @@ function init() {
         popup.isReady()
           .then(function(result) {
             console.log('popup.isReady success', result);
+            keyBackup = result;
             $('#private_key_backup_cont').empty();
           })
           .catch(function(error) {
             console.log('popup.isReady error', error);
+            keyBackup = null;
           });
       })
       .catch(function(error) {
         console.log('keyring.createKeyBackupContainer error', error);
+      });
+  });
+
+  $('#restoreBackupContainerBtn').on('click', function() {
+    console.log('#restoreBackupContainerBtn click');
+
+    $('#private_key_backup_cont').empty();
+
+    keyring.addSyncHandler(syncHandlerObj)
+      .then(function(result) {
+        console.log('keyring.addSyncHandler success', result);
+      })
+      .catch(function(error) {
+        console.log('keyring.addSyncHandler error', error);
+      });
+
+
+    var options = {};
+    keyring.restoreBackupContainer('#private_key_backup_cont', options)
+      .then(function(restoreBackup) {
+        console.log('keyring.restoreBackupContainer success', restoreBackup);
+
+        restoreBackup.isReady()
+          .then(function(result) {
+            console.log('restoreBackup.isReady success', result);
+          })
+          .catch(function(error) {
+            console.log('restoreBackup.isReady error', error);
+          })
+          .then(function() {
+            $('#private_key_backup_cont').empty();
+          });
+      })
+      .catch(function(error) {
+        console.log('keyring.restoreBackupContainer error', error);
+
+        $('#private_key_backup_cont').empty();
       });
   });
 

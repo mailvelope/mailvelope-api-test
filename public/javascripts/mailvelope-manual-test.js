@@ -268,4 +268,41 @@ function init() {
       })
   });
 
+  $('#openIframeSettingsBtn').on('click', function() {
+    console.log('#openIframeSettingsBtn click');
+
+    $('#settings').empty();
+
+    mailvelope.getKeyring('test@gmx.de-mail.de')
+      .then(function(keyring) {
+        console.log('mailvelope.getKeyring(test@gmx.de-mail.de) succcess', keyring);
+
+        mailvelope.createSettingsContainer('#settings', keyring, {email: "test@gmx.de-mail.de", fullName: "John Smith"})
+          .then(function(result) {
+            console.log('mailvelope.createSettingsContainer() success', result);
+          })
+          .catch(function(error) {
+            console.log('mailvelope.createSettingsContainer() error', error);
+          });
+      })
+      .catch(function(error) {
+        console.log('mailvelope.getKeyring(test@gmx.de-mail.de) error', error);
+
+        mailvelope.createKeyring('test@gmx.de-mail.de')
+          .then(function(keyring) {
+            console.log('mailvelope.createKeyring(test@gmx.de-mail.de) success', keyring);
+
+            mailvelope.createSettingsContainer('#settings', keyring, {email: "test@gmx.de-mail.de", fullName: "John Smith"})
+              .then(function(result) {
+                console.log('mailvelope.createSettingsContainer() success', result);
+              })
+              .catch(function(error) {
+                console.log('mailvelope.createSettingsContainer() error', error);
+              });
+          })
+          .catch(function(error) {
+            console.log('mailvelope.createKeyring(test@gmx.de-mail.de) error', error);
+          });
+      });
+  });
 }

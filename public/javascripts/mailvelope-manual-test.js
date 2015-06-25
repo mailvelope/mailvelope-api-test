@@ -33,6 +33,7 @@ function init() {
   });
 
   var keyring = null;
+  var senderAdress = 'test@mailvelope.com';
 
   mailvelope.getKeyring('test.user').then(function(kr) {
     keyring = kr;
@@ -117,7 +118,7 @@ function init() {
         $('#notSignEncryptBtn').on('click', function() {
           console.log('notSignEncryptBtn click');
           var t0 = performance.now();
-          editor.encrypt(['test@mailvelope.com']).then(function(armored) {
+          editor.encrypt([senderAdress]).then(function(armored) {
             $('#encryptTime').val(parseInt(performance.now() - t0));
             $('#armored_msg').val(armored);
           });
@@ -129,7 +130,9 @@ function init() {
   $('#decryptBtn').on('click', function() {
     $('#display_cont').empty();
     var t0 = performance.now();
-    mailvelope.createDisplayContainer('#display_cont', $('#armored_msg').val(), keyring).then(function() {
+    var options = { senderAddress: senderAdress };
+
+    mailvelope.createDisplayContainer('#display_cont', $('#armored_msg').val(), keyring, options).then(function() {
       $('#decryptTime').val(parseInt(performance.now() - t0));
     });
   });
@@ -206,6 +209,7 @@ function init() {
       });
 
   });
+
   $('#recreateKeyBackupContainerBtn').on('click', function() {
     console.log('#recreateKeyBackupContainerBtn click');
     var options = {

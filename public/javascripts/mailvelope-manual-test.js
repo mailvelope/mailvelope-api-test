@@ -151,8 +151,14 @@ function init() {
     $('#private_key_backup_cont').empty();
 
     var options = {
-      email: 'test@mailvelope.com',
-      fullName: 'Generated on ' + (new Date()).toLocaleString(),
+      userIds: [{
+        email: 'test@mailvelope.com',
+        fullName: 'Generated on ' + (new Date()).toLocaleString(),
+      },
+      {
+        email: 'second@mailvelope.com',
+        fullName: 'Second User',
+      }],
       keySize: 2048
     };
 

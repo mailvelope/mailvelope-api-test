@@ -258,7 +258,9 @@ function init() {
       });
 
 
-    var options = {};
+    var options = {
+      restorePassword: false
+    };
     keyring.restoreBackupContainer('#private_key_backup_cont', options)
       .then(function(restoreBackup) {
         console.log('keyring.restoreBackupContainer success', restoreBackup);
@@ -272,6 +274,45 @@ function init() {
           })
           .then(function() {
             $('#private_key_backup_cont').empty();
+          });
+      })
+      .catch(function(error) {
+        console.log('keyring.restoreBackupContainer error', error);
+
+        $('#private_key_backup_cont').empty();
+      });
+  });
+
+  $('#restorePasswordContainerBtn').on('click', function() {
+    console.log('#restorePasswordContainerBtn click');
+
+    $('#private_key_backup_cont').empty();
+
+    keyring.addSyncHandler(syncHandlerObj)
+      .then(function(result) {
+        console.log('keyring.addSyncHandler success', result);
+      })
+      .catch(function(error) {
+        console.log('keyring.addSyncHandler error', error);
+      });
+
+
+    var options = {
+      restorePassword: true
+    };
+    keyring.restoreBackupContainer('#private_key_backup_cont', options)
+      .then(function(restoreBackup) {
+        console.log('keyring.restoreBackupContainer success', restoreBackup);
+
+        restoreBackup.isReady()
+          .then(function(result) {
+            console.log('restoreBackup.isReady success', result);
+          })
+          .catch(function(error) {
+            console.log('restoreBackup.isReady error', error);
+          })
+          .then(function() {
+            //$('#private_key_backup_cont').empty();
           });
       })
       .catch(function(error) {

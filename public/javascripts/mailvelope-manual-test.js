@@ -38,57 +38,69 @@ function init() {
   mailvelope.getKeyring('test.user').then(function(kr) {
     keyring = kr;
     initEditor();
+    initSync();
   });
 
   var keyBackup = null;
 
-  var syncHandlerObj = {
-    /**
-     * upload the private key backup on the backend server
-     * @param syncObj
-     */
-    uploadSync: function(syncObj) {
-      console.log('callback', syncObj);
-      return new Promise(function(resolve, reject) {
-        resolve({});
-      });
-    },
+  function initSync() {
+    var syncHandlerObj = {
+      /**
+       * Upload the public keyring to the backend server
+       * @param syncObj
+       */
+      uploadSync: function(syncObj) {
+        console.log('callback', syncObj);
+        return new Promise(function(resolve, reject) {
+          resolve({});
+        });
+      },
 
-    /**
-     * download the private key backup from the backend server
-     * @param syncObj
-     */
-    downloadSync: function(syncObj) {
-      console.log('downloadSync callback', syncObj);
-      return new Promise(function(resolve, reject) {
-        resolve({});
-      });
-    },
+      /**
+       * Download the public keyring from the backend server
+       * @param syncObj
+       */
+      downloadSync: function(syncObj) {
+        console.log('downloadSync callback', syncObj);
+        return new Promise(function(resolve, reject) {
+          resolve({});
+        });
+      },
 
-    /**
-     *
-     * @param syncObj
-     */
-    backup: function(syncObj) {
-      console.log('backup callback', syncObj);
-      return new Promise(function(resolve, reject) {
-        resolve({});
-      });
-    },
+      /**
+       * Backup private key
+       * @param syncObj
+       */
+      backup: function(syncObj) {
+        console.log('backup callback', syncObj);
+        return new Promise(function(resolve, reject) {
+          keyBackup = syncObj;
+          resolve();
+          //reject(new Error('Network error'));
+        });
+      },
 
-    /**
-     * get the private key backup from the backend server
-     */
-    restore: function() {
-      return new Promise(function(resolve, reject) {
-        if (keyBackup) {
-          resolve(keyBackup);
-        } else {
-          reject(new Error('No key backup available.'));
-        }
+      /**
+       * Restore private key backup
+       */
+      restore: function() {
+        return new Promise(function(resolve, reject) {
+          if (keyBackup) {
+            resolve({ backup: keyBackup });
+          } else {
+            reject(new Error('No key backup available.'));
+          }
+        });
+      }
+    };
+    keyring.addSyncHandler(syncHandlerObj)
+      .then(function(result) {
+        console.log('keyring.addSyncHandler success', result);
+      })
+      .catch(function(error) {
+        console.log('keyring.addSyncHandler error', error);
       });
-    }
-  };
+  }
 
   function initEditor() {
     $.get('../data/msg.asc', function(msg) {
@@ -210,7 +222,6 @@ function init() {
         popup.isReady()
           .then(function(result) {
             console.log('popup.isReady success', result);
-            keyBackup = result;
             $('#private_key_backup_cont').empty();
           })
           .catch(function(error) {
@@ -239,7 +250,6 @@ function init() {
         popup.isReady()
           .then(function(result) {
             console.log('popup.isReady success', result);
-            keyBackup = result;
             $('#private_key_backup_cont').empty();
           })
           .catch(function(error) {
@@ -256,15 +266,6 @@ function init() {
     console.log('#restoreBackupContainerBtn click');
 
     $('#private_key_backup_cont').empty();
-
-    keyring.addSyncHandler(syncHandlerObj)
-      .then(function(result) {
-        console.log('keyring.addSyncHandler success', result);
-      })
-      .catch(function(error) {
-        console.log('keyring.addSyncHandler error', error);
-      });
-
 
     var options = {
       restorePassword: false
@@ -295,15 +296,6 @@ function init() {
     console.log('#restorePasswordContainerBtn click');
 
     $('#private_key_backup_cont').empty();
-
-    keyring.addSyncHandler(syncHandlerObj)
-      .then(function(result) {
-        console.log('keyring.addSyncHandler success', result);
-      })
-      .catch(function(error) {
-        console.log('keyring.addSyncHandler error', error);
-      });
-
 
     var options = {
       restorePassword: true

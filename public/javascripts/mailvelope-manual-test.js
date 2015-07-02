@@ -171,6 +171,10 @@ function init() {
           .addClass('btn-success')
           .on('click', function() {
 
+            $('#generateGeneratorBtn')
+              .attr('disabled', true)
+              .removeClass('btn-success');
+
             generator.generate()
               .then(function(result) {
                 console.log('generator.generate success', result);
@@ -178,6 +182,10 @@ function init() {
               })
               .catch(function(error) {
                 console.log('generator.generate error', error);
+
+                $('#generateGeneratorBtn')
+                  .removeAttr('disabled')
+                  .addClass('btn-success');
               });
           });
       })

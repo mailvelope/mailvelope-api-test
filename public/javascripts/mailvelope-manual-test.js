@@ -114,10 +114,15 @@ function init() {
         $('#signEncryptBtn').on('click', function() {
           console.log('signEncryptBtn click');
           var t0 = performance.now();
-          editor.encrypt(['test@mailvelope.com']).then(function(armored) {
-            $('#encryptTime').val(parseInt(performance.now() - t0));
-            $('#armored_msg').val(armored);
-          });
+          editor.encrypt(['test@mailvelope.com'])
+            .then(function(armored) {
+              console.log('editor.encrypt() success', armored);
+              $('#encryptTime').val(parseInt(performance.now() - t0));
+              $('#armored_msg').val(armored);
+            })
+            .catch(function(error) {
+              console.log('editor.encrypt() error', error);
+            });
         });
       });
       mailvelope.createEditorContainer('#notSignEditorCont', keyring, {
@@ -130,10 +135,15 @@ function init() {
         $('#notSignEncryptBtn').on('click', function() {
           console.log('notSignEncryptBtn click');
           var t0 = performance.now();
-          editor.encrypt([senderAdress]).then(function(armored) {
-            $('#encryptTime').val(parseInt(performance.now() - t0));
-            $('#armored_msg').val(armored);
-          });
+          editor.encrypt([senderAdress])
+            .then(function(armored) {
+              console.log('editor.encrypt() success', armored);
+              $('#encryptTime').val(parseInt(performance.now() - t0));
+              $('#armored_msg').val(armored);
+            })
+            .catch(function(error) {
+              console.log('editor.encrypt() error', error);
+            });
         });
       });
     });

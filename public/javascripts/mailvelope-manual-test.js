@@ -201,6 +201,9 @@ function init() {
               .then(function(result) {
                 console.log('generator.generate success', result);
                 $('#private_key_backup_cont').empty();
+                $('#generateGeneratorBtn')
+                  .removeAttr('disabled')
+                  .addClass('btn-success');
               })
               .catch(function(error) {
                 console.log('generator.generate error', error);

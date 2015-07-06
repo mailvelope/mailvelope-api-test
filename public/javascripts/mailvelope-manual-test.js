@@ -175,11 +175,11 @@ function init() {
     var options = {
       userIds: [{
         email: 'test@mailvelope.com',
-        fullName: 'Generated on ' + (new Date()).toLocaleString(),
+        fullName: 'Generated on ' + (new Date()).toLocaleString()
       },
       {
         email: 'second@mailvelope.com',
-        fullName: 'Second User',
+        fullName: 'Second User'
       }],
       keySize: 2048
     };
@@ -221,9 +221,6 @@ function init() {
 
   $('#createKeyBackupContainerBtn').on('click', function() {
     console.log('#createKeyBackupContainerBtn click');
-
-    $('#private_key_backup_cont').empty();
-
     var options = {};
 
     $('#private_key_backup_cont').empty();

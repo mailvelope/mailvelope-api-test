@@ -34,6 +34,7 @@ function init() {
 
   var keyring = null;
   var senderAdress = 'test@mailvelope.com';
+  var uploadLimit = 10;
 
   mailvelope.getKeyring('test.user').then(function(kr) {
     keyring = kr;
@@ -108,7 +109,7 @@ function init() {
         predefinedText: 'This is a predefined text as in options.predefined',
         quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
         quotedMail: msg,
-        quota: 25 * 1024,
+        quota: uploadLimit * 1024,
         signMsg: true
       }).then(function(editor) {
         $('#signEncryptBtn').on('click', function() {
@@ -129,7 +130,7 @@ function init() {
         predefinedText: 'This is a predefined text as in options.predefined',
         quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
         quotedMail: msg,
-        quota: 25 * 1024,
+        quota: uploadLimit * 1024,
         signMsg: false
       }).then(function(editor) {
         $('#notSignEncryptBtn').on('click', function() {
@@ -367,7 +368,7 @@ function init() {
       .then(function(keyring) {
         console.log('mailvelope.getKeyring(test@gmx.de-mail.de) succcess', keyring);
 
-        mailvelope.createSettingsContainer('#settings', keyring, {email: "test@gmx.de-mail.de", fullName: "John Smith"})
+        mailvelope.createSettingsContainer('#settings', keyring, {email: 'test@gmx.de-mail.de', fullName: 'John Smith'})
           .then(function(result) {
             console.log('mailvelope.createSettingsContainer() success', result);
           })
@@ -382,7 +383,7 @@ function init() {
           .then(function(keyring) {
             console.log('mailvelope.createKeyring(test@gmx.de-mail.de) success', keyring);
 
-            mailvelope.createSettingsContainer('#settings', keyring, {email: "test@gmx.de-mail.de", fullName: "John Smith"})
+            mailvelope.createSettingsContainer('#settings', keyring, {email: 'test@gmx.de-mail.de', fullName: 'John Smith'})
               .then(function(result) {
                 console.log('mailvelope.createSettingsContainer() success', result);
               })

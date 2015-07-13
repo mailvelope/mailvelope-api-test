@@ -51,9 +51,23 @@ function init() {
        * @param syncObj
        */
       uploadSync: function(syncObj) {
-        console.log('callback', syncObj);
+        console.log('uploadSync handler', syncObj);
         return new Promise(function(resolve, reject) {
-          resolve({});
+          if ($('#uploadBackupFail').is(':checked')) {
+            console.log('uploadSync reject');
+            reject(new Error('Upload sync error simulation'));
+            return;
+          }
+          if (syncObj.eTag != $('#eTag').val()) {
+            console.log('uploadSync eTag mismatch');
+            reject(new Error('Upload sync error: eTag mismatch'));
+            return;
+          }
+          var eTag = getHash();
+          $('#eTag').val(eTag);
+          $('#backupServerSync').val(syncObj.keyringMsg);
+          console.log('uploadSync resolve');
+          resolve({eTag: eTag});
         });
       },
 
@@ -62,9 +76,20 @@ function init() {
        * @param syncObj
        */
       downloadSync: function(syncObj) {
-        console.log('downloadSync callback', syncObj);
+        console.log('downloadSync handler', syncObj);
         return new Promise(function(resolve, reject) {
-          resolve({});
+          if ($('#downloadBackupFail').is(':checked')) {
+            console.log('downloadSync reject');
+            reject(new Error('Download sync error simulation'));
+            return;
+          }
+          if (syncObj.eTag == $('#eTag').val()) {
+            console.log('Download sync equal eTag - no download');
+            resolve({});
+            return;
+          }
+          console.log('downloadSync resolve');
+          resolve({eTag: $('#eTag').val(), keyringMsg: $('#backupServerSync').val()});
         });
       },
 
@@ -73,7 +98,7 @@ function init() {
        * @param syncObj
        */
       backup: function(syncObj) {
-        console.log('backup callback', syncObj);
+        console.log('backup handler', syncObj);
         return new Promise(function(resolve, reject) {
           keyBackup = syncObj;
           resolve();
@@ -85,6 +110,7 @@ function init() {
        * Restore private key backup
        */
       restore: function() {
+        console.log('restore handler', syncObj);
         return new Promise(function(resolve, reject) {
           if (keyBackup) {
             resolve({ backup: keyBackup });
@@ -136,6 +162,7 @@ function init() {
             });
         });
       });
+      /*
       mailvelope.createEditorContainer('#notSignEditorCont', keyring, {
         predefinedText: 'This is a predefined text as in options.predefined',
         quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
@@ -157,8 +184,14 @@ function init() {
             });
         });
       });
+      */
     });
   }
+
+  $('#generateEtagBtn').on('click', function() {
+    console.log('generateEtagBtn click');
+    $('#eTag').val(getHash());
+  });
 
   $('#decryptBtn').on('click', function() {
     $('#display_cont').empty();
@@ -398,3 +431,17 @@ function init() {
       });
   });
 }
+
+
+/**
+ * Helper area
+ */
+function getHash() {
+  var result = '';
+  var buf = new Uint16Array(2);
+  window.crypto.getRandomValues(buf);
+  for (var i = 0; i < buf.length; i++) {
+    result += buf[i].toString(16);
+  }
+  return result;
+};

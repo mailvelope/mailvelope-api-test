@@ -83,6 +83,27 @@ html
 
       .panel.panel-default
         .panel-heading
+          h3.panel-title Backup server sync:
+        .panel-body
+          .form-group
+            textarea#backupServerSync(rows="12", style="width: 100%").form-control
+        .panel-footer
+          .form-group
+            label.checkbox-inline
+              input#downloadBackupFail(type="checkbox")
+              | Download backup fail
+            label.checkbox-inline
+              input#uploadBackupFail(type="checkbox")
+              | Upload backup fail
+          .form-group
+            .input-group
+              span.input-group-addon eTag:
+              input#eTag.form-control
+              span.input-group-btn
+                button#generateEtagBtn.btn.btn-primary generate
+
+      .panel.panel-default
+        .panel-heading
           h3.panel-title KeyGen &amp; PrivateKeyBackup Generator:
         .panel-body
           #private_key_backup_cont(style="height: 350px;margin-bottom:1em")

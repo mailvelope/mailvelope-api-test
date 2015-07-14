@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 function init() {
-  
+
   $('#clearBtn').on('click', function() {
     $('#editor_cont, #display_cont').empty();
     $('#encryptBtn').off('click');
@@ -221,7 +221,9 @@ function init() {
 
   $('#createKeyBackupContainerBtn').on('click', function() {
     console.log('#createKeyBackupContainerBtn click');
-    var options = {};
+    var options = {
+      initialSetup: true
+    };
 
     $('#private_key_backup_cont').empty();
 

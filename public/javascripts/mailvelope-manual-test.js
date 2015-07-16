@@ -280,10 +280,7 @@ function init() {
 
     $('#private_key_backup_cont').empty();
 
-    var options = {
-      restorePassword: false
-    };
-    keyring.restoreBackupContainer('#private_key_backup_cont', options)
+    keyring.restoreBackupContainer('#private_key_backup_cont')
       .then(function(restoreBackup) {
         console.log('keyring.restoreBackupContainer success', restoreBackup);
 
@@ -293,9 +290,6 @@ function init() {
           })
           .catch(function(error) {
             console.log('restoreBackup.isReady error', error);
-          })
-          .then(function() {
-            $('#private_key_backup_cont').empty();
           });
       })
       .catch(function(error) {
@@ -323,9 +317,6 @@ function init() {
           })
           .catch(function(error) {
             console.log('restoreBackup.isReady error', error);
-          })
-          .then(function() {
-            //$('#private_key_backup_cont').empty();
           });
       })
       .catch(function(error) {

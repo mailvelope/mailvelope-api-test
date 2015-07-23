@@ -34,6 +34,7 @@ function init() {
 
   var keyring = null;
   var senderAddress = 'test@mailvelope.com';
+  var recipient = 'test@mailvelope.com';
   var uploadLimit = 10;
 
   mailvelope.getKeyring('test.user').then(function(kr) {
@@ -138,55 +139,66 @@ function init() {
     return address;
   }
 
-  function initEditor() {
+  function getRecipient () {
+    var address = $('#toAddress').val();
+
+    if(address === '') {
+      return recipient;
+    }
+    return address;
+  }
+
+  /**
+   * @param {Object} [options]
+   * @param {Boolean} [options.signAndEncrypt] default: false
+   */
+  function initEditor(options) {
+
+    var $encryptBtn = $('#encryptBtn');
+    var $editorCont = $('#editorCont');
+    var $encryptTime = $('#encryptTime');
+    var $armored_msg = $('#armored_msg');
+
+    var signAndEncrypt = (options && options.signAndEncrypt) || false;
+
     $.get('../data/msg.asc', function(msg) {
-      mailvelope.createEditorContainer('#signEditorCont', keyring, {
+
+      $editorCont.empty();
+      $armored_msg.val('');
+      $encryptTime.val('');
+
+      mailvelope.createEditorContainer('#editorCont', keyring, {
         predefinedText: 'This is a predefined text as in options.predefined',
         quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
         quotedMail: msg,
         quota: uploadLimit * 1024,
-        signMsg: true
+        signMsg: signAndEncrypt
       }).then(function(editor) {
-        $('#signEncryptBtn').on('click', function() {
-          console.log('signEncryptBtn click');
+
+        $encryptBtn.on('click', function() {
+          console.log('encryptBtn click');
           var t0 = performance.now();
 
-          editor.encrypt([getSenderAddress()])
+          editor.encrypt([getRecipient()])
             .then(function(armored) {
               console.log('editor.encrypt() success', armored);
-              $('#encryptTime').val(parseInt(performance.now() - t0));
-              $('#armored_msg').val(armored);
+              $encryptTime.val(parseInt(performance.now() - t0));
+              $armored_msg.val(armored);
             })
             .catch(function(error) {
               console.log('editor.encrypt() error', error);
             });
         });
       });
-      /*
-      mailvelope.createEditorContainer('#notSignEditorCont', keyring, {
-        predefinedText: 'This is a predefined text as in options.predefined',
-        quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
-        quotedMail: msg,
-        quota: uploadLimit * 1024,
-        signMsg: false
-      }).then(function(editor) {
-        $('#notSignEncryptBtn').on('click', function() {
-          console.log('notSignEncryptBtn click');
-          var t0 = performance.now();
-          editor.encrypt([getSenderAddress()])
-            .then(function(armored) {
-              console.log('editor.encrypt() success', armored);
-              $('#encryptTime').val(parseInt(performance.now() - t0));
-              $('#armored_msg').val(armored);
-            })
-            .catch(function(error) {
-              console.log('editor.encrypt() error', error);
-            });
-        });
-      });
-      */
     });
   }
+
+  $('#toggleEditor').bootstrapSwitch({
+    labelText: 'Sign',
+    onSwitchChange: function(evt, state) {
+      initEditor({signAndEncrypt: state});
+    }
+  });
 
   $('#generateEtagBtn').on('click', function() {
     console.log('generateEtagBtn click');

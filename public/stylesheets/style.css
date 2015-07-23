@@ -16,3 +16,7 @@ a {
 .btn-group {
   margin-bottom: .5em;
 }
+
+.bootstrap-switch {
+  margin-right: 1em;
+}

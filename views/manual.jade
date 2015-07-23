@@ -25,6 +25,11 @@ html
         .panel-heading
           h3.panel-title Encrypt message:
         .panel-body
+          .form-group
+            .input-group
+              span.input-group-addon My primary key:
+              input#senderAddress(value="test@mailvelope.com").form-control
+
           ul.nav.nav-tabs(role="tablist")
             li.active(role="presentation")
               a(href="#signEmail" aria-controls="signEmail" role="tab" data-toggle="tab") sign and encrypt

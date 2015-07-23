@@ -33,7 +33,7 @@ function init() {
   });
 
   var keyring = null;
-  var senderAdress = 'test@mailvelope.com';
+  var senderAddress = 'test@mailvelope.com';
   var uploadLimit = 10;
 
   mailvelope.getKeyring('test.user').then(function(kr) {
@@ -103,6 +103,15 @@ function init() {
       });
   }
 
+  function getSenderAddress () {
+    var address = $('#senderAddress').val();
+
+    if(address === '') {
+      return senderAddress
+    }
+    return address;
+  }
+
   function initEditor() {
     $.get('../data/msg.asc', function(msg) {
       mailvelope.createEditorContainer('#signEditorCont', keyring, {
@@ -115,7 +124,8 @@ function init() {
         $('#signEncryptBtn').on('click', function() {
           console.log('signEncryptBtn click');
           var t0 = performance.now();
-          editor.encrypt(['test@mailvelope.com'])
+
+          editor.encrypt([getSenderAddress()])
             .then(function(armored) {
               console.log('editor.encrypt() success', armored);
               $('#encryptTime').val(parseInt(performance.now() - t0));
@@ -136,7 +146,7 @@ function init() {
         $('#notSignEncryptBtn').on('click', function() {
           console.log('notSignEncryptBtn click');
           var t0 = performance.now();
-          editor.encrypt([senderAdress])
+          editor.encrypt([getSenderAddress()])
             .then(function(armored) {
               console.log('editor.encrypt() success', armored);
               $('#encryptTime').val(parseInt(performance.now() - t0));
@@ -153,7 +163,7 @@ function init() {
   $('#decryptBtn').on('click', function() {
     $('#display_cont').empty();
     var t0 = performance.now();
-    var options = { senderAddress: senderAdress };
+    var options = { senderAddress: getSenderAddress() };
 
     mailvelope.createDisplayContainer('#display_cont', $('#armored_msg').val(), keyring, options).then(function() {
       $('#decryptTime').val(parseInt(performance.now() - t0));
@@ -175,7 +185,7 @@ function init() {
 
     var options = {
       userIds: [{
-        email: 'test@mailvelope.com',
+        email: senderAddress,
         fullName: 'Generated on ' + (new Date()).toLocaleString()
       },
       {

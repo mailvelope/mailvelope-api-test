@@ -110,10 +110,10 @@ function init() {
        * Restore private key backup
        */
       restore: function() {
-        console.log('restore handler', syncObj);
+        console.log('restore handler');
         return new Promise(function(resolve, reject) {
           if (keyBackup) {
-            resolve({ backup: keyBackup });
+            resolve(keyBackup);
           } else {
             reject(new Error('No key backup available.'));
           }

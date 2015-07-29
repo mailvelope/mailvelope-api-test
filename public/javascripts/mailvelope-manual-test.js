@@ -39,7 +39,7 @@ function init() {
 
   mailvelope.getKeyring('test.user').then(function(kr) {
     keyring = kr;
-    initEditor();
+    initEditor({signAndEncrypt: true});
     initSync();
   });
 
@@ -122,8 +122,8 @@ function init() {
       }
     };
     keyring.addSyncHandler(syncHandlerObj)
-      .then(function(result) {
-        console.log('keyring.addSyncHandler success', result);
+      .then(function() {
+        console.log('keyring.addSyncHandler success');
       })
       .catch(function(error) {
         console.log('keyring.addSyncHandler error', error);
@@ -153,7 +153,6 @@ function init() {
    * @param {Boolean} [options.signAndEncrypt] default: false
    */
   function initEditor(options) {
-
     var $encryptBtn = $('#encryptBtn');
     var $editorCont = $('#editorCont');
     var $encryptTime = $('#encryptTime');
@@ -164,6 +163,7 @@ function init() {
     $.get('../data/msg.asc', function(msg) {
 
       $editorCont.empty();
+      $encryptBtn.off('click');
       $armored_msg.val('');
       $encryptTime.val('');
 
@@ -174,7 +174,6 @@ function init() {
         quota: uploadLimit * 1024,
         signMsg: signAndEncrypt
       }).then(function(editor) {
-
         $encryptBtn.on('click', function() {
           console.log('encryptBtn click');
           var t0 = performance.now();

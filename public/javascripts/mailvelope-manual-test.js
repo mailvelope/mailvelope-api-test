@@ -86,7 +86,7 @@ function init() {
           }
           if (syncObj.eTag == $('#eTag').val()) {
             console.log('Download sync equal eTag - no download');
-            resolve({});
+            resolve({eTag: $('#eTag').val()});
             return;
           }
           console.log('downloadSync resolve');
@@ -236,7 +236,7 @@ function init() {
         email: 'second@mailvelope.com',
         fullName: 'Second User'
       }],
-      keySize: 2048
+      keySize: 4096
     };
 
     keyring.createKeyGenContainer('#private_key_backup_cont', options)

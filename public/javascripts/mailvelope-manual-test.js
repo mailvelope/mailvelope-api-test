@@ -172,7 +172,8 @@ function init() {
         quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
         quotedMail: msg,
         quota: uploadLimit * 1024,
-        signMsg: signAndEncrypt
+        signMsg: signAndEncrypt,
+        keepAttachments: true
       }).then(function(editor) {
         $encryptBtn.on('click', function() {
           console.log('encryptBtn click');

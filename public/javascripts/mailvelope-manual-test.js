@@ -5,6 +5,9 @@ $(document).ready(function() {
   } else {
     window.addEventListener('mailvelope', init, false);
   }
+  window.addEventListener('mailvelope-disconnect', function() {
+    $('#disconnectModal').modal('show');
+  }, false);
 });
 
 function init() {

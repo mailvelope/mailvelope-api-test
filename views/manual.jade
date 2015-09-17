@@ -138,3 +138,11 @@ html
             button#openSettingsBtn.btn.btn-default Open Settings in Tab
             button#openIframeSettingsBtn.btn.btn-default Open Settings in iFrame
 
+      #disconnectModal.modal.fade(tabindex="-1" role="dialog")
+        .modal-dialog(role="document")
+          .modal-content
+            .modal-header
+              h4.modal-title Disconnect Event
+            .modal-body Event "mailvelope-disconnect" triggered due to extension update
+            .modal-footer
+              button(type="button" class="btn btn-default" data-dismiss="modal") Close

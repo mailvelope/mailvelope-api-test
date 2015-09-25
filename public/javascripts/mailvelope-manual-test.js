@@ -257,7 +257,23 @@ function init() {
               .attr('disabled', true)
               .removeClass('btn-success');
 
-            generator.generate()
+            var confirm = $('#confirmKeyGen').prop('checked');
+            var rejectKey = $('#rejectKeyGen').prop('checked');
+            var delay = parseInt($('#confirmDelay').val()) || 1;
+            var confirmPromise;
+            if (confirm || rejectKey) {
+              confirmPromise = new Promise(function(resolve, reject) {
+                window.setTimeout(function() {
+                  if (confirm) {
+                    resolve();
+                  } else if (rejectKey) {
+                    reject();
+                  }
+                }, delay);
+              });
+            }
+
+            generator.generate(confirmPromise)
               .then(function(result) {
                 console.log('generator.generate success', result);
                 $('#private_key_backup_cont').empty();

@@ -113,6 +113,19 @@ html
           .btn-group(role=group)
             button#restoreBackupContainerBtn.btn.btn-default restore Backup
             button#restorePasswordContainerBtn.btn.btn-default restore Password
+          .row
+            .col-lg-2
+              .checkbox
+                label
+                  input#confirmKeyGen(type="checkbox")
+                  | Confirm key upload
+              .checkbox
+                label
+                  input#rejectKeyGen(type="checkbox")
+                  | Reject key upload
+              .input-group
+                input#confirmDelay.form-control(type="text")
+                span.input-group-addon ms
 
       .panel.panel-default
         .panel-heading

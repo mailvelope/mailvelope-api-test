@@ -1,15 +1,25 @@
 
 $(document).ready(function() {
   if (typeof mailvelope !== 'undefined') {
-    init();
+    load();
   } else {
-    window.addEventListener('mailvelope', init, false);
+    window.addEventListener('mailvelope', load, false);
   }
   window.addEventListener('mailvelope-disconnect', function(event) {
     $('#newVersion').val(event.detail.version);
     $('#disconnectModal').modal('show');
   }, false);
 });
+
+var pgp_msg;
+var draft_msg;
+
+function load() {
+  $.get('../data/msg.asc', function(msg) {
+    pgp_msg = msg;
+    init();
+  });
+}
 
 function init() {
 
@@ -27,14 +37,19 @@ function init() {
     initEditor();
   });
 
+  $('#restoreDraftBtn').on('click', function() {
+    $('#editor_cont').empty();
+    $('#encryptBtn').off('click');
+    $('#encryptTime').val('');
+    initEditor({restoreDraft: true, signAndEncrypt: true});
+  });
+
   $('.panel .nav-tabs a').click(function (e) {
     e.preventDefault();
     $(this).tab('show')
   });
 
-  $(function () {
-    $('[data-toggle=tooltip]').tooltip()
-  });
+  $('[data-toggle=tooltip]').tooltip();
 
   var keyring = null;
   var senderAddress = 'test@mailvelope.com';
@@ -155,44 +170,64 @@ function init() {
   /**
    * @param {Object} [options]
    * @param {Boolean} [options.signAndEncrypt] default: false
+   * @param {Boolean} [options.restoreDraft]
    */
   function initEditor(options) {
     var $encryptBtn = $('#encryptBtn');
+    var $draftBtn = $('#draftBtn');
     var $editorCont = $('#editorCont');
     var $encryptTime = $('#encryptTime');
     var $armored_msg = $('#armored_msg');
 
     var signAndEncrypt = (options && options.signAndEncrypt) || false;
 
-    $.get('../data/msg.asc', function(msg) {
+    $editorCont.empty();
+    $encryptBtn.off('click');
+    $draftBtn.off('click');
+    $armored_msg.val('');
+    $encryptTime.val('');
 
-      $editorCont.empty();
-      $encryptBtn.off('click');
-      $armored_msg.val('');
-      $encryptTime.val('');
+    var editorOptions = {
+      quota: uploadLimit * 1024,
+      signMsg: signAndEncrypt
+    };
 
-      mailvelope.createEditorContainer('#editorCont', keyring, {
-        predefinedText: 'This is a predefined text as in options.predefined',
-        quotedMailHeader: 'On Feb 22, 2015 6:34 AM, "Test User" <test@mailvelope.com> wrote:',
-        quotedMail: msg,
-        quota: uploadLimit * 1024,
-        signMsg: signAndEncrypt,
-        keepAttachments: true
-      }).then(function(editor) {
-        $encryptBtn.on('click', function() {
-          console.log('encryptBtn click');
-          var t0 = performance.now();
+    if (options && options.restoreDraft) {
+      editorOptions.armoredDraft = draft_msg;
+    } else {
+      editorOptions.predefinedText = 'This is a predefined text as in options.predefined';
+      editorOptions.quotedMailHeader = 'On ' + new Date() + ', "Test User" <test@mailvelope.com> wrote:';
+      editorOptions.quotedMail = pgp_msg;
+      editorOptions.keepAttachments = true;
+    }
 
-          editor.encrypt([getRecipient()])
-            .then(function(armored) {
-              console.log('editor.encrypt() success', armored);
-              $encryptTime.val(parseInt(performance.now() - t0));
-              $armored_msg.val(armored);
-            })
-            .catch(function(error) {
-              console.log('editor.encrypt() error', error);
-            });
-        });
+    mailvelope.createEditorContainer('#editorCont', keyring, editorOptions).then(function(editor) {
+      $encryptBtn.on('click', function() {
+        console.log('encryptBtn click');
+        var t0 = performance.now();
+        editor.encrypt([getRecipient()])
+          .then(function(armored) {
+            console.log('editor.encrypt() success', armored);
+            $encryptTime.val(parseInt(performance.now() - t0));
+            $armored_msg.val(armored);
+          })
+          .catch(function(error) {
+            console.log('editor.encrypt() error', error);
+          });
+      });
+      $draftBtn.on('click', function() {
+        console.log('draftBtn click');
+        var t0 = performance.now();
+        editor.createDraft()
+          .then(function(armored) {
+            console.log('editor.createDraft() success', armored);
+            $encryptTime.val(parseInt(performance.now() - t0));
+            $armored_msg.val(armored);
+            draft_msg = armored;
+          })
+          .catch(function(error) {
+            console.log('editor.createDraft() error', error);
+          });
       });
     });
   }

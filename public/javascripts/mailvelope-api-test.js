@@ -150,32 +150,48 @@ describe('Mailvelope API test', function() {
         });
       });
 
-      it('addSyncHandler', function(done) {
+      it('hasPrivateKey', function() {
+        return keyring.hasPrivateKey('aa1e01774bdf7d76a45bdc2df11db1250c3c3f1b')
+        .then(function(result) {
+          expect(result).to.be.true;
+        });
+      });
+
+      it('hasPrivateKey - has not', function() {
+        return keyring.hasPrivateKey('9400a492b06bfaed38dad7ece1059060cbb71881')
+        .then(function(result) {
+          expect(result).to.be.false;
+        });
+      });
+
+      it('addSyncHandler', function() {
 
         var syncHandlerObj = {
           uploadSync: function(syncObj) {
-            console.log('callback', syncObj);
+            console.log('uploadSync handler', syncObj);
+            return Promise.resolve();
           },
 
           downloadSync: function(syncObj) {
-            console.log('downloadSync callback', syncObj);
+            console.log('downloadSync handler', syncObj);
+            return Promise.resolve();
           },
 
           backup: function(syncObj) {
-            console.log('backup callback', syncObj);
+            console.log('backup handler', syncObj);
+            return Promise.resolve();
           },
 
           restore: function() {
-            consoloe.log('restore callback');
+            consoloe.log('restore handler');
+            return Promise.resolve();
           }
         };
 
-        keyring.addSyncHandler(syncHandlerObj)
-          .then(function(result) {
-            expect(result).to.exist();
-            done();
-          })
-          .catch(done);
+        return keyring.addSyncHandler(syncHandlerObj)
+        .then(function(result) {
+          expect(result).to.be.undefined;
+        });
       });
     });
 

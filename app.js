@@ -19,6 +19,7 @@ app.use('/manual', routes);
 app.use('/settings', routes);
 app.use('/unit', routes);
 app.use('/users', users);
+app.use('/form', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

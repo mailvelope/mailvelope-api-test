@@ -18,4 +18,8 @@ router.get('/unit', function(req, res) {
   res.render('unit', { title: 'Mailvelope API Unit Test' });
 });
 
+router.get('/form', function(req, res) {
+  res.render('form', { title: 'Mailvelope Encrypted Form test' });
+});
+
 module.exports = router;

@@ -4,13 +4,14 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src="javascripts/jquery-2.1.1.min.js")
-    script(src="javascripts/start.js")
+    link(rel='stylesheet', href='/stylesheets/pgp-encrypted-form.css')
+    script(src='javascripts/custom-elements.min.js')
+    script(src='javascripts/pgp-encrypted-form.js')
   body
     .container
       h2 Mailvelope Encrypted form
       br
-      pgp-encrypted-form(signature="iLMEAQEKAB0WIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWqJuxgAKCRDxHbElDDw/GyKBA/9RQrUw/Bz0Dniu9/pD7J5b1Rijzs/351UpkBd91DoRVm7KI6pZvKafYUtxVv2SRrwApDYu2A3+g5Dp1oin73GEox7CVN9Sqs1laxIyiMewamdqiQHk/JMPT678MORp1efd8wzG2b4OAH3YI790/XDSztUPY6xy2Yl0k4X5ZRhqMQ===E+T9" hash="SHA1")
+      pgp-encrypted-form#examplePgpForm(signature="iLMEAQEKAB0WIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWqJuxgAKCRDxHbElDDw/GyKBA/9RQrUw/Bz0Dniu9/pD7J5b1Rijzs/351UpkBd91DoRVm7KI6pZvKafYUtxVv2SRrwApDYu2A3+g5Dp1oin73GEox7CVN9Sqs1laxIyiMewamdqiQHk/JMPT678MORp1efd8wzG2b4OAH3YI790/XDSztUPY6xy2Yl0k4X5ZRhqMQ===E+T9" hash="SHA1")
         form(data-url="demo.mailvelope.com" class="form-horizontal" data-recipient="test@mailvelope.com")
           .form-group
             label.col-sm-2.control-label(for=exampleInputEmail1) Email

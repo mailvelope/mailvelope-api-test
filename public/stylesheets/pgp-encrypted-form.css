@@ -1,0 +1,32 @@
+/**
+ * Default element style
+ */
+pgp-encrypted-form {
+    display:block;
+    width: 100%;
+}
+pgp-encrypted-form form {
+    display:none;
+}
+
+/**
+ * Pre-style element prior registration
+ */
+pgp-encrypted-form:not(:defined):after {
+    position:absolute;
+    content: 'Loading...';
+}
+
+/**
+ * Pre-style element prior Mailvelope API available
+ */
+pgp-encrypted-form.loading:after {
+    position:absolute;
+    content: 'Loading...';
+}
+
+/**
+ * Style of element after registration
+ */
+pgp-encrypted-form:defined {
+}

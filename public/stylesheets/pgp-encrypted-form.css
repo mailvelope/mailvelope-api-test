@@ -4,6 +4,7 @@
 pgp-encrypted-form {
     display:block;
     width: 100%;
+    min-height:3em;
 }
 pgp-encrypted-form form {
     display:none;
@@ -12,7 +13,7 @@ pgp-encrypted-form form {
 /**
  * Pre-style element prior registration
  */
-pgp-encrypted-form:not(:defined):after {
+pgp-encrypted-form:after {
     position:absolute;
     content: 'Loading...';
 }
@@ -28,5 +29,8 @@ pgp-encrypted-form.loading:after {
 /**
  * Style of element after registration
  */
-pgp-encrypted-form:defined {
+pgp-encrypted-form.defined:after,
+pgp-encrypted-form.error:after {
+    position:absolute;
+    content: '';
 }

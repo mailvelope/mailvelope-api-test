@@ -20,7 +20,7 @@ router.get('/unit', function(req, res) {
 
 // Form test routes
 router.get('/form', function(req, res) {
-  res.render('form', { title: 'Mailvelope Encrypted Form test' });
+  res.render('form/default', { title: 'Mailvelope Encrypted Form test' });
 });
 router.get('/form/missing-recipient', function(req, res) {
   res.render('form/missing-recipient', { title: 'Mailvelope Encrypted Form test | Missing recipient property' });

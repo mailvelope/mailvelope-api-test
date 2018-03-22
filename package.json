@@ -6,7 +6,9 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "~4.13",
+    "express-session": "^1.15.6",
     "jade": "~1.11"
   },
   "devDependencies": {

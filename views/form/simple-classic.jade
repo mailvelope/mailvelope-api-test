@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='../stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='../stylesheets/style.css')
+    link(rel='stylesheet', href='../stylesheets/pgp-encrypted-form.css')
+    script(src="../javascripts/jquery-2.1.1.min.js")
+    script(src='../javascripts/custom-elements.min.js')
+    script(src='../javascripts/form-test.js')
+  body
+    .container
+      h2 Mailvelope Encrypted form
+      br
+      form.needs-validation(novalidate='' method='post' action="/form" class="form-horizontal" data-recipient="test@mailvelope.com")
+        .form-row
+          .col-md-4.mb-3
+            label(for='validationCustomSimple') How are you?
+            .input-group
+              input#validationCustomSimple.form-control(type='text', required='', name='validationCustomSimple')
+              .invalid-feedback
+                | Please say something?
+        input(type='submit' value='send')

@@ -9,24 +9,23 @@ $(document).ready(function() {
 
   // Custom element events
   pgpForm.addEventListener('error', function (error) {
-    $('#examplePgpForm').addClass('error').text(error.message);
+    $('#examplePgpForm').remove();
+    $('bg-error').text(error.message);
   });
 
-  pgpForm.addEventListener('onConnected', function () {
-    console.log('connected');
+  pgpForm.addEventListener('connected', function () {
     pgpFormDefined = true;
     $('#examplePgpForm').addClass('defined');
   });
 
-  // Other events for demo/test // will be removed
-  pgpForm.addEventListener('onSomething', function (event) {
-    console.log('PageScript::something');
-    console.log(event.detail.something);
-  });
-
-  pgpForm.addEventListener('onSomethingElse', function () {
-    console.log('PageScript::somethingElse');
-    console.log(this.somethingElse);
+  pgpForm.addEventListener('encrypt', function (event) {
+    $('#examplePgpForm').remove();
+    const response = $('<pre/>').text(event.detail.armoredData);
+    const success = $('<p/>', {
+      class: 'bg-success',
+      style: 'padding:1em'
+    }).text('Success: mailvelope api returned the following content');
+    $('.container').append(success).append(response);
   });
 
   // Support check

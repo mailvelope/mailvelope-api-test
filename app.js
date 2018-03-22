@@ -3,8 +3,17 @@ var path = require('path');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var app = express();
+
+// session setup
+app.use(session({
+  secret: 'not really a secret',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -13,6 +22,7 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser());
 
 app.use('/', routes);
 app.use('/manual', routes);

@@ -1,0 +1,5 @@
+ul.nav
+  each val, index in scenarios
+    li
+      - var select=null; if (index == scenario) select='selected';
+      a(href=index class=select) #{val}

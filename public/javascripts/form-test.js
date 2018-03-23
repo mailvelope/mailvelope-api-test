@@ -9,8 +9,13 @@ $(document).ready(function() {
 
   // Custom element events
   pgpForm.addEventListener('error', function (error) {
+    console.log(error);
     $('#examplePgpForm').remove();
-    $('bg-error').text(error.message);
+    const $error = $('<p/>', {
+      class: 'bg-danger',
+      style: 'padding:1em'
+    }).text(error.message);
+    $('.container').append($error);
   });
 
   pgpForm.addEventListener('connected', function () {

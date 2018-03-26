@@ -31,6 +31,7 @@ const scenarios = {
   'error-missing-recipient':  'Error Missing recipient',
   'error-invalid-action':     'Error invalid action',
   'error-invalid-recipient':  'Error invalid recipient',
+  'error-unknown-recipient':  'Error unknown recipient',
 };
 for (let s in scenarios) {
   router.get('/form/' + s, function(req, res) {

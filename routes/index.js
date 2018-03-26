@@ -23,6 +23,8 @@ router.get('/unit', function(req, res) {
 const scenarios = {
   'success-with-data-action': 'Success with data-action',
   'success-no-data-action':   'Success without data-action',
+  'success-json':             'Success with json enctype output',
+  'success-html':             'Success with html enctype output',
   'success-complex':          'Success complex form',
   'error-empty-form':         'Error Empty form tag',
   'error-two-forms':          'Error Too many form tags',
@@ -30,6 +32,7 @@ const scenarios = {
   'error-missing-form':       'Error Missing form tag',
   'error-missing-recipient':  'Error Missing recipient',
   'error-invalid-action':     'Error invalid action',
+  'error-invalid-enctype':    'Error invalid enctype',
   'error-invalid-recipient':  'Error invalid recipient',
   'error-unknown-recipient':  'Error unknown recipient',
 };

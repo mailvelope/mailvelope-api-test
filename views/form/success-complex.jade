@@ -1,19 +1,19 @@
 extends common.jade
 block form
   pgp-encrypted-form#examplePgpForm(signature="iLMEAQEKAB0WIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWqJuxgAKCRDxHbElDDw/GyKBA/9RQrUw/Bz0Dniu9/pD7J5b1Rijzs/351UpkBd91DoRVm7KI6pZvKafYUtxVv2SRrwApDYu2A3+g5Dp1oin73GEox7CVN9Sqs1laxIyiMewamdqiQHk/JMPT678MORp1efd8wzG2b4OAH3YI790/XDSztUPY6xy2Yl0k4X5ZRhqMQ===E+T9" hash="SHA1")
-    form.needs-validation(novalidate='' data-url="demo.mailvelope.com" url="#" class="form-horizontal" data-recipient="test@mailvelope.com")
+    form.needs-validation(novalidate='' data-url="demo.mailvelope.com" url="#" data-recipient="test@mailvelope.com")
       .form-row
-        .col-md-4.mb-3
+        .form-group.col-md-4.mb-3
           label(for='validationCustom01') First name
           input#validationCustom01.form-control(type='text', placeholder='First name', value='Mark', required='', name='validationCustom01')
           .valid-feedback
             | Looks good!
-        .col-md-4.mb-3
+        .form-group.col-md-4.mb-3
           label(for='validationCustom02') Last name
           input#validationCustom02.form-control(type='text', placeholder='Last name', value='Otto', required='', name='validationCustom02')
           .valid-feedback
             | Looks good!
-        .col-md-4.mb-3
+        .form-group.col-md-4.mb-3
           label(for='validationCustomUsername') Email
           .input-group
             .input-group-prepend
@@ -23,17 +23,17 @@ block form
               | Please choose a valid email.
 
       .form-row
-        .col-md-6.mb-3
+        .form-group.col-md-6.mb-3
           label(for='validationCustom03') City
           input#validationCustom03.form-control(type='text', placeholder='City', required='', name='validationCustom03')
           .invalid-feedback
             | Please provide a valid city.
-        .col-md-3.mb-3
+        .form-group.col-md-3.mb-3
           label(for='validationCustom04') State
           input#validationCustom04.form-control(type='text', placeholder='State', required='', name='validationCustom04')
           .invalid-feedback
             | Please provide a valid state.
-        .col-md-3.mb-3
+        .form-group.col-md-3.mb-3
           label(for='validationCustom05') Zip
           input#validationCustom05.form-control(type='text', placeholder='Zip', required='', name='validationCustom05')
           .invalid-feedback
@@ -48,13 +48,14 @@ block form
           label.custom-control-label(for='customControlValidation3') Or toggle this other custom radio
           .invalid-feedback More example invalid feedback text
 
-      .form-group
-        select.custom-select(required='' name='single-select')
-          option(value='') Open this select menu
-          option(value='1') One
-          option(value='2') Two
-          option(value='3') Three
-        .invalid-feedback Example invalid custom select feedback
+      .form-row
+        .form-group.col-md-6.mb-3
+          select.custom-select(required='' name='single-select')
+            option(value='') Open this select menu
+            option(value='1') One
+            option(value='2') Two
+            option(value='3') Three
+          .invalid-feedback Example invalid custom select feedback
 
       .form-group
         .custom-file
@@ -64,8 +65,7 @@ block form
 
       .form-group
         label.textarea-check-label(for=exampleTextarea) Textarea
-        .col-sm-10
-          textarea#exampleTextarea(class="form-control" rows="3" name='textareaExample' required)
+        textarea#exampleTextarea(class="form-control" rows="3" name='textareaExample' required)
 
       .form-group
         .form-check

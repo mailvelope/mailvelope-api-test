@@ -22,6 +22,7 @@ router.get('/unit', function(req, res) {
 
 // Form test scenarios
 const scenarios = {
+  'index':                    'Index',
   'success-with-data-action': 'Success with data-action',
   'success-no-data-action':   'Success without data-action',
   'success-json':             'Success with json enctype output',
@@ -45,6 +46,9 @@ for (let s in scenarios) {
 
 // Form post handling endpoint
 // Demonstrate session is working
+router.get('/form', function(req, res) {
+  res.redirect('/form/index');
+});
 router.post('/form', function(req, res) {
   session = req.session;
   session.armoredData = req.body.armoredData;

@@ -1,7 +1,7 @@
 extends common.jade
 block form
-  pgp-encrypted-form#examplePgpForm(hash="SHA512" signature="_TODO_")
-    form.needs-validation(novalidate='' data-url="demo.mailvelope.com" url="#" data-recipient="test@mailvelope.com")
+  pgp-encrypted-form#examplePgpForm(hash="SHA512" signature="iMgEAQEKADIWIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWsXC+RQcdGVzdEBtYWlsdmVsb3BlLmNvbQAKCRDxHbElDDw/G8WKA/9daF4ihgNpc0c608wISs0uNc+Al65LUt35Hn4jkp28Ey9IIuuBlRKuIZ49fb5HsRH2HOOae8KioBO7spR+ZdhkGHfiNH5LAGeGkuW8kKqzL79FZDrUr3aqIg8WEO5w09XLkWAdNXlC3JZi0Ssko8VQ1P/eEppnFFDmYUYHzvWSxA===NzlF")
+    form.needs-validation(novalidate='' data-enctype="json" data-url="demo.mailvelope.com" url="#" data-recipient="test@mailvelope.com")
       .form-row
         .form-group.col-md-4.mb-3
           label(for='validationCustom01') First name
@@ -59,13 +59,13 @@ block form
 
       .form-group
         .custom-file
-          input#validatedCustomFile.custom-file-input(type='file', required='' name='fileExample' multiple)
+          input#validatedCustomFile.custom-file-input(type='file', required='' name='fileExample' multiple='')
           label.custom-file-label(for='validatedCustomFile') Choose file...
           .invalid-feedback Example invalid custom file feedback
 
       .form-group
         label.textarea-check-label(for=exampleTextarea) Textarea
-        textarea#exampleTextarea(class="form-control" rows="3" name='textareaExample' required)
+        textarea#exampleTextarea(class="form-control" rows="3" name='textareaExample' required='')
 
       .form-group
         .form-check

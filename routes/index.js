@@ -31,6 +31,7 @@ const scenarios = {
   'error-empty-form':         'Error Empty form tag',
   'error-two-forms':          'Error Too many form tags',
   'error-empty-signature':    'Error Empty signature',
+  'error-missing-id':         'Error Missing id',
   'error-missing-form':       'Error Missing form tag',
   'error-missing-recipient':  'Error Missing recipient',
   'error-invalid-action':     'Error invalid action',

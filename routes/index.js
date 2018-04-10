@@ -33,6 +33,7 @@ const scenarios = {
   'error-empty-signature':    'Error Empty signature',
   'error-missing-id':         'Error Missing id',
   'error-missing-form':       'Error Missing form tag',
+  'error-missing-html':       'Error Missing html',
   'error-missing-recipient':  'Error Missing recipient',
   'error-invalid-action':     'Error invalid action',
   'error-invalid-enctype':    'Error invalid enctype',

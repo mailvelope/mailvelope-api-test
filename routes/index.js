@@ -34,6 +34,7 @@ const scenarios = {
   'error-missing-id':         'Error Missing id',
   'error-missing-form':       'Error Missing form tag',
   'error-missing-html':       'Error Missing html',
+  'error-missing-template':   'Error Missing template',
   'error-missing-recipient':  'Error Missing recipient',
   'error-invalid-action':     'Error invalid action',
   'error-invalid-enctype':    'Error invalid enctype',

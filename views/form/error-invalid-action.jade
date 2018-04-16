@@ -1,8 +1,9 @@
 extends common.jade
 block form
   pgp-encrypted-form#examplePgpForm(signature="_TODO_")
-    form(data-recipient="test@demo.mailvelope.com" data-action="somewhere" class="form-horizontal")
-      .form-group
-        label.col-sm-2.control-label(for=exampleInputEmail1) Email
-        .col-sm-10
-          input#exampleInputEmail1(type="email" class="form-control" placeholder="Email")
+    script(type="text/template")
+      form(data-recipient="test@demo.mailvelope.com" data-action="somewhere" class="form-horizontal")
+        .form-group
+          label.col-sm-2.control-label(for=exampleInputEmail1) Email
+          .col-sm-10
+            input#exampleInputEmail1(type="email" class="form-control" placeholder="Email")

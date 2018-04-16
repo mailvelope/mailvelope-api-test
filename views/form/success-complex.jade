@@ -1,76 +1,77 @@
 extends common.jade
 block form
-  pgp-encrypted-form#examplePgpForm(signature="iMgEAQEKADIWIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWsXC+RQcdGVzdEBtYWlsdmVsb3BlLmNvbQAKCRDxHbElDDw/G8WKA/9daF4ihgNpc0c608wISs0uNc+Al65LUt35Hn4jkp28Ey9IIuuBlRKuIZ49fb5HsRH2HOOae8KioBO7spR+ZdhkGHfiNH5LAGeGkuW8kKqzL79FZDrUr3aqIg8WEO5w09XLkWAdNXlC3JZi0Ssko8VQ1P/eEppnFFDmYUYHzvWSxA===NzlF")
-    form.needs-validation(novalidate='' data-enctype="json" data-url="demo.mailvelope.com" url="#" data-recipient="test@mailvelope.com")
-      .form-row
-        .form-group.col-md-4.mb-3
-          label(for='validationCustom01') First name
-          input#validationCustom01.form-control(type='text', placeholder='First name', value='Mark', required='', name='validationCustom01')
-          .valid-feedback
-            | Looks good!
-        .form-group.col-md-4.mb-3
-          label(for='validationCustom02') Last name
-          input#validationCustom02.form-control(type='text', placeholder='Last name', value='Otto', required='', name='validationCustom02')
-          .valid-feedback
-            | Looks good!
-        .form-group.col-md-4.mb-3
-          label(for='validationCustomUsername') Email
-          .input-group
-            .input-group-prepend
-              span#inputGroupPrepend.input-group-text @
-            input#validationCustomUsername.form-control(type='email', placeholder='Email', aria-describedby='inputGroupPrepend', required='', name='validationCustomUsername')
+  pgp-encrypted-form#examplePgpForm(signature="iMgEAQEKADIWIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWtRCyRQcdGVzdEBtYWlsdmVsb3BlLmNvbQAKCRDxHbElDDw/G6/GBACB+cDOJTx3R2E3MNOXt8ZzsmRvADi3+c33DHOgydpujN79Zcz3GCfnOU5D6KXQBwVW4lEGNwZa1Fz/0hgygQ/MWobG62MuTn7kihQp+JmxD2xKI4gv5ib4KKQB6+aigg0NjNUDu2JQ+d8q8AT8vvB3N3jAEYi1GAtYueJdMjxLGw===XgPf")
+    script(type="text/template")
+      form.needs-validation(novalidate='' data-enctype="json" data-url="demo.mailvelope.com" url="#" data-recipient="test@mailvelope.com")
+        .form-row
+          .form-group.col-md-4.mb-3
+            label(for='validationCustom01') First name
+            input#validationCustom01.form-control(type='text', placeholder='First name', value='Mark', required='', name='validationCustom01')
+            .valid-feedback
+              | Looks good!
+          .form-group.col-md-4.mb-3
+            label(for='validationCustom02') Last name
+            input#validationCustom02.form-control(type='text', placeholder='Last name', value='Otto', required='', name='validationCustom02')
+            .valid-feedback
+              | Looks good!
+          .form-group.col-md-4.mb-3
+            label(for='validationCustomUsername') Email
+            .input-group
+              .input-group-prepend
+                span#inputGroupPrepend.input-group-text @
+              input#validationCustomUsername.form-control(type='email', placeholder='Email', aria-describedby='inputGroupPrepend', required='', name='validationCustomUsername')
+              .invalid-feedback
+                | Please choose a valid email.
+
+        .form-row
+          .form-group.col-md-6.mb-3
+            label(for='validationCustom03') City
+            input#validationCustom03.form-control(type='text', placeholder='City', required='', name='validationCustom03')
             .invalid-feedback
-              | Please choose a valid email.
+              | Please provide a valid city.
+          .form-group.col-md-3.mb-3
+            label(for='validationCustom04') State
+            input#validationCustom04.form-control(type='text', placeholder='State', required='', name='validationCustom04')
+            .invalid-feedback
+              | Please provide a valid state.
+          .form-group.col-md-3.mb-3
+            label(for='validationCustom05') Zip
+            input#validationCustom05.form-control(type='text', placeholder='Zip', required='', name='validationCustom05')
+            .invalid-feedback
+              | Please provide a valid zip.
 
-      .form-row
-        .form-group.col-md-6.mb-3
-          label(for='validationCustom03') City
-          input#validationCustom03.form-control(type='text', placeholder='City', required='', name='validationCustom03')
-          .invalid-feedback
-            | Please provide a valid city.
-        .form-group.col-md-3.mb-3
-          label(for='validationCustom04') State
-          input#validationCustom04.form-control(type='text', placeholder='State', required='', name='validationCustom04')
-          .invalid-feedback
-            | Please provide a valid state.
-        .form-group.col-md-3.mb-3
-          label(for='validationCustom05') Zip
-          input#validationCustom05.form-control(type='text', placeholder='Zip', required='', name='validationCustom05')
-          .invalid-feedback
-            | Please provide a valid zip.
+        .form-group
+          .custom-control.custom-radio
+            input#customControlValidation2.custom-control-input(type='radio', name='radio-stacked', required='')
+            label.custom-control-label(for='customControlValidation2') Toggle this custom radio
+          .custom-control.custom-radio.mb-3
+            input#customControlValidation3.custom-control-input(type='radio', name='radio-stacked', required='')
+            label.custom-control-label(for='customControlValidation3') Or toggle this other custom radio
+              .invalid-feedback More example invalid feedback text
 
-      .form-group
-        .custom-control.custom-radio
-          input#customControlValidation2.custom-control-input(type='radio', name='radio-stacked', required='')
-          label.custom-control-label(for='customControlValidation2') Toggle this custom radio
-        .custom-control.custom-radio.mb-3
-          input#customControlValidation3.custom-control-input(type='radio', name='radio-stacked', required='')
-          label.custom-control-label(for='customControlValidation3') Or toggle this other custom radio
-          .invalid-feedback More example invalid feedback text
+        .form-row
+          .form-group.col-md-6.mb-3
+            select.custom-select(required='' name='single-select')
+              option(value='') Open this select menu
+              option(value='1') One
+              option(value='2') Two
+              option(value='3') Three
+            .invalid-feedback Example invalid custom select feedback
 
-      .form-row
-        .form-group.col-md-6.mb-3
-          select.custom-select(required='' name='single-select')
-            option(value='') Open this select menu
-            option(value='1') One
-            option(value='2') Two
-            option(value='3') Three
-          .invalid-feedback Example invalid custom select feedback
+        .form-group
+          .custom-file
+            input#validatedCustomFile.custom-file-input(type='file', required='' name='fileExample' multiple='')
+            label.custom-file-label(for='validatedCustomFile') Choose file...
+            .invalid-feedback Example invalid custom file feedback
 
-      .form-group
-        .custom-file
-          input#validatedCustomFile.custom-file-input(type='file', required='' name='fileExample' multiple='')
-          label.custom-file-label(for='validatedCustomFile') Choose file...
-          .invalid-feedback Example invalid custom file feedback
+        .form-group
+          label.textarea-check-label(for=exampleTextarea) Textarea
+          textarea#exampleTextarea(class="form-control" rows="3" name='textareaExample' required='')
 
-      .form-group
-        label.textarea-check-label(for=exampleTextarea) Textarea
-        textarea#exampleTextarea(class="form-control" rows="3" name='textareaExample' required='')
-
-      .form-group
-        .form-check
-          input#invalidCheck.form-check-input(type='checkbox', value='', required='', name='invalidCheck')
-          label.form-check-label(for='invalidCheck' value='true')
-            | Agree to terms and conditions
-          .invalid-feedback
-            | You must agree before submitting.
+        .form-group
+          .form-check
+            input#invalidCheck.form-check-input(type='checkbox', value='', required='', name='invalidCheck')
+            label.form-check-label(for='invalidCheck' value='true')
+              | Agree to terms and conditions
+            .invalid-feedback
+              | You must agree before submitting.

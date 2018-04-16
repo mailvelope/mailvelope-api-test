@@ -1,11 +1,12 @@
 extends common.jade
 block form
   pgp-encrypted-form#examplePgpForm(signature="iMgEAQEKADIWIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWrzkqxQcdGVzdEBtYWlsdmVsb3BlLmNvbQAKCRDxHbElDDw/G2eXBACle+iF8GtMq6jtJICWrHiBRAgtl8BqPgVxqecFCsAVKF0wc+ca0MQSkNUHznJpDGKhsvqwG3j+VTrDhRpDLJezGp0PxwT572woMASQ7hzES8Syy5vVK7WtzZwoDhqQB4ltiLp0/hWdEwSubpC/cwhDl9Hs+P46v6xYNCY36YmmlQ===VbVs" hash="SHA512")
-    form.needs-validation(novalidate='' data-recipient="test@mailvelope.com" data-enctype="json")
-      .form-group.form-row
-        .col-md-4.mb-3
-          label(for='validationCustomSimple') How are you?
-          .input-group
-            input#validationCustomSimple.form-control(type='text', required='', name='validationCustomSimple', value='cofveve')
-            .invalid-feedback
-              | Please say something?
+    script(type="text/template")
+      form.needs-validation(novalidate='' data-recipient="test@mailvelope.com" data-enctype="json")
+        .form-group.form-row
+          .col-md-4.mb-3
+            label(for='validationCustomSimple') How are you?
+            .input-group
+              input#validationCustomSimple.form-control(type='text', required='', name='validationCustomSimple', value='cofveve')
+              .invalid-feedback
+                | Please say something?

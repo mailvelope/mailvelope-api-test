@@ -1,11 +1,12 @@
 extends common.jade
 block form
   pgp-encrypted-form#examplePgpForm(signature="_TODO_")
-    form.needs-validation(novalidate='' data-recipient="test@mailvelope.com" data-enctype="invalid")
-      .form-row
-        .col-md-4.mb-3
-          label(for='validationCustomSimple') How are you?
-          .input-group
-            input#validationCustomSimple.form-control(type='text', required='', name='validationCustomSimple', value='cofveve')
-            .invalid-feedback
-              | Please say something?
+    script(type="text/template")
+      form.needs-validation(novalidate='' data-recipient="test@mailvelope.com" data-enctype="invalid")
+        .form-row
+          .col-md-4.mb-3
+            label(for='validationCustomSimple') How are you?
+            .input-group
+              input#validationCustomSimple.form-control(type='text', required='', name='validationCustomSimple', value='cofveve')
+              .invalid-feedback
+                | Please say something?

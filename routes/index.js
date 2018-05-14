@@ -40,6 +40,8 @@ const scenarios = {
   'error-invalid-enctype':    'Error invalid enctype',
   'error-invalid-recipient':  'Error invalid recipient',
   'error-unknown-recipient':  'Error unknown recipient',
+  'error-invalid-signature':  'Error invalid signature (checksum)',
+  'error-invalid-signature2': 'Error invalid signature (format)',
 };
 for (let s in scenarios) {
   router.get('/form/' + s, function(req, res) {

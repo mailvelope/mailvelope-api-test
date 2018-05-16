@@ -27,6 +27,7 @@ const scenarios = {
   'success-no-data-action':   'Success without data-action',
   'success-json':             'Success with json enctype output',
   'success-html':             'Success with html enctype output',
+  'success-file':             'Success file form',
   'success-complex':          'Success complex form',
   'error-empty-form':         'Error Empty form tag',
   'error-two-forms':          'Error Too many form tags',

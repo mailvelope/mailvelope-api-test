@@ -1,7 +1,8 @@
 doctype html
-html
+html.no-js
   include includes/head.jade
   body
     .container
       include includes/header.jade
+      .no-js.bg-danger.message Javascript is needed on this page.
       block form

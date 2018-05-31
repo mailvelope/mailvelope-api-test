@@ -1,4 +1,17 @@
 /**
+ * Generic messages
+ */
+.message {
+    padding:1em;
+}
+html.no-js .no-js.message {
+    display:block;
+}
+html .no-js.message {
+    display:none;
+}
+
+/**
  * Default element style
  */
 pgp-encrypted-form {
@@ -29,6 +42,8 @@ pgp-encrypted-form.loading:after {
 /**
  * Style of element after registration
  */
+.no-js pgp-encrypted-form.loading:after,
+.no-js pgp-encrypted-form:after,
 pgp-encrypted-form.defined:after,
 pgp-encrypted-form.error:after {
     position:absolute;

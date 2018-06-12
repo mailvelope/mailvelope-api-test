@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $('html').removeClass('no-js');
 
-  $('pgp-encrypted-form').each(function() {
+  $('openpgp-encrypted-form').each(function() {
     let pgpFormDefined = false;
     let pgpForm = this;
 

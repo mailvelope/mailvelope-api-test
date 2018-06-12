@@ -1,6 +1,6 @@
 extends common.jade
 block form
-  pgp-encrypted-form#examplePgpForm(signature="iMgEAQEKADIWIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWtRCyRQcdGVzdEBtYWlsdmVsb3BlLmNvbQAKCRDxHbElDDw/G6/GBACB+cDOJTx3R2E3MNOXt8ZzsmRvADi3+c33DHOgydpujN79Zcz3GCfnOU5D6KXQBwVW4lEGNwZa1Fz/0hgygQ/MWobG62MuTn7kihQp+JmxD2xKI4gv5ib4KKQB6+aigg0NjNUDu2JQ+d8q8AT8vvB3N3jAEYi1GAtYueJdMjxLGw===XgPf")
+  openpgp-encrypted-form#examplePgpForm(signature="iMgEAQEKADIWIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWtRCyRQcdGVzdEBtYWlsdmVsb3BlLmNvbQAKCRDxHbElDDw/G6/GBACB+cDOJTx3R2E3MNOXt8ZzsmRvADi3+c33DHOgydpujN79Zcz3GCfnOU5D6KXQBwVW4lEGNwZa1Fz/0hgygQ/MWobG62MuTn7kihQp+JmxD2xKI4gv5ib4KKQB6+aigg0NjNUDu2JQ+d8q8AT8vvB3N3jAEYi1GAtYueJdMjxLGw===XgPf")
     script(type="text/template")
       form.needs-validation(novalidate='' data-enctype="json" data-url="demo.mailvelope.com" url="#" data-recipient="test@mailvelope.com")
         .form-row

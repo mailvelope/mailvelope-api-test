@@ -1,11 +1,5 @@
 extends common.jade
 block form
-  pgp-encrypted-form#examplePgpForm(signature="wpwEAQEIABAFAlsPvNQJEPEdsSUMPD8bAACrIgQAi6V6ouOeXxaTn5sWvixAwkfrhJ8MpncQqkoYuF3z7d2GtqcRVQWK9IM2tm2+Ns8pgWpXiGNy4hMMWG/kx0xomt3WpSMPO0D3vpMCnPcuJC38RfV4p3kRBOpF9CAZatXJlRCc2lhK3gnPTBFz/d3N10iu9wqwmUXYjYtzB/1hLoE==r1g8")
-    script(type="text/template")
-      form.needs-validation(novalidate='' data-action="https://demo.mailvelope.com/form/" data-recipient="test@mailvelope.com")
-        .form-group
-          label(for='validationCustomSimple') How are you?
-          .input-group
-            input#validationCustomSimple.form-control(type='text', required='', name='validationCustomSimple', value='cofveve')
-            .invalid-feedback
-              | Please say something?
+  openpgp-encrypted-form#form-mGsX(signature="wpwEAQEIABAFAlsfZhgJEPEdsSUMPD8bAABx4QQAmL3LkE1z0jHYxghB0lH9ee15D93FrrWfpvJwLVlIq1iCANH+15nm2KTmF559KNFy8dER5+s044ZsTuSKBmf5FgzrdbAYG1KSup/NnZ2TNMFOKLb5Bc7tLyopD+n5NQ/ctnVuX0v1NMmH5FhKP88j/07kt3hk2s8OWI0NqMHeNZs==3HOs")
+    script(type="text/template").
+      <form class="needs-validation" data-recipient="test@mailvelope.com" data-action="https://demo.mailvelope.com/form/"><div class="form-group"><label for="validationCustomSimple">How are you?</label><div class="input-group"><input class="form-control" value="cofveve" name="validationCustomSimple" required="" type="text" id="validationCustomSimple"><div class="invalid-feedback">Please say something?</div></div></div></form>

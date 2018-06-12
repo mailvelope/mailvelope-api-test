@@ -14,19 +14,19 @@ html .no-js.message {
 /**
  * Default element style
  */
-pgp-encrypted-form {
+openpgp-encrypted-form {
     display:block;
     width: 100%;
     min-height:3em;
 }
-pgp-encrypted-form form {
+openpgp-encrypted-form form {
     display:none;
 }
 
 /**
  * Pre-style element prior registration
  */
-pgp-encrypted-form:after {
+openpgp-encrypted-form:after {
     position:absolute;
     content: 'Loading...';
 }
@@ -34,7 +34,7 @@ pgp-encrypted-form:after {
 /**
  * Pre-style element prior Mailvelope API available
  */
-pgp-encrypted-form.loading:after {
+openpgp-encrypted-form.loading:after {
     position:absolute;
     content: 'Loading...';
 }
@@ -42,10 +42,10 @@ pgp-encrypted-form.loading:after {
 /**
  * Style of element after registration
  */
-.no-js pgp-encrypted-form.loading:after,
-.no-js pgp-encrypted-form:after,
-pgp-encrypted-form.defined:after,
-pgp-encrypted-form.error:after {
+.no-js openpgp-encrypted-form.loading:after,
+.no-js openpgp-encrypted-form:after,
+openpgp-encrypted-form.defined:after,
+openpgp-encrypted-form.error:after {
     position:absolute;
     content: '';
 }

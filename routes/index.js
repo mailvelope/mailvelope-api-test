@@ -29,6 +29,7 @@ const scenarios = {
   'success-html':             'Success with html enctype output',
   'success-file':             'Success file form',
   'success-complex':          'Success complex form',
+  'success-with-image':       'Success with img',
   'error-empty-form':         'Error Empty form tag',
   'error-two-forms':          'Error Too many form tags',
   'error-empty-signature':    'Error Empty signature',

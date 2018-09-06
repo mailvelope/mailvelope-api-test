@@ -40,7 +40,6 @@ const scenarios = {
   'error-missing-template':    'Error Missing template',
   'error-missing-recipient':   'Error Missing recipient',
   'error-invalid-action':      'Error invalid action',
-  'error-unsecure-action':     'Error unsecure action',
   'error-invalid-enctype':     'Error invalid enctype',
   'error-invalid-recipient':   'Error invalid recipient',
   'error-unknown-recipient':   'Error unknown recipient',

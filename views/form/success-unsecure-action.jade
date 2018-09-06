@@ -1,0 +1,11 @@
+extends common.jade
+block form
+  openpgp-encrypted-form#examplePgpForm(signature="iMgEAQEKADIWIQSqHgF3S999dqRb3C3xHbElDDw/GwUCWrzhlxQcdGVzdEBtYWlsdmVsb3BlLmNvbQAKCRDxHbElDDw/G1jTA/9OpoGeat0Z10ArgTsNbhbGVT6TlgVizsKhJk3RgoBQ1Q0A8FlP5kkH/Ran+LwwoGrb5JhPTloLWazBoTLPxZr009uaKJegttYnqbg4kNW2WqGtWr9tEh67Zyy7z8TQiRTX7lxx4waapCDwFLgy8otir6jgnrNxsqP709j/S84fcA===y7zb")
+    script(type="text/template")
+      form.needs-validation(novalidate='' data-action="http://demo.mailvelope.com/form/" data-recipient="test@mailvelope.com")
+        .form-group
+          label(for='validationCustomSimple') How are you?
+          .input-group
+            input#validationCustomSimple.form-control(type='text', required='', name='validationCustomSimple', value='cofveve')
+            .invalid-feedback
+              | Please say something?

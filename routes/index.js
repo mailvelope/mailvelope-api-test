@@ -41,12 +41,12 @@ const scenarios = {
   'error-missing-template':    'Error Missing template',
   'error-missing-recipient':   'Error Missing recipient',
   'error-invalid-action':      'Error invalid action',
-  'error-unsecure-action':     'Error unsecure action',
   'error-invalid-enctype':     'Error invalid enctype',
   'error-invalid-recipient':   'Error invalid recipient',
   'error-unknown-recipient':   'Error unknown recipient',
   'error-invalid-signature':   'Error invalid signature (checksum)',
   'error-invalid-signature2':  'Error invalid signature (format)',
+  'error-invalid-signature3':  'Error invalid signature (content)',
 };
 for (let s in scenarios) {
   router.get('/form/' + s, function(req, res) {

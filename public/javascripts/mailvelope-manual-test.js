@@ -54,7 +54,7 @@ function init() {
   var keyring = null;
   var senderAddress = 'test@mailvelope.com';
   var recipient = 'test@mailvelope.com';
-  var uploadLimit = 10;
+  var uploadLimit = 24;
 
   mailvelope.getKeyring('test.user').then(function(kr) {
     keyring = kr;

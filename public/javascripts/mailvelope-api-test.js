@@ -208,7 +208,7 @@ describe('Mailvelope API test', function() {
 
       it('createDisplayContainer', function(done) {
         mailvelope.createDisplayContainer('#test_display', pgp_msg, keyring).then(function() {
-          expect($('#test_display iframe[src*="decryptInline"]').length).to.equal(1);
+          expect($('#test_display iframe[src*="decryptMessage"]').length).to.equal(1);
           done();
         }).catch(done);
       });

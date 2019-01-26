@@ -23,7 +23,7 @@ $(document).ready(function() {
       $(pgpForm).remove();
       const response = $('<pre/>').text(event.detail.armoredData);
       const success = $('<p/>', {class: 'message bg-success'})
-        .text('Success: mailvelope api returned the following content');
+        .text('Success: Mailvelope api returned the following content');
       $('.container').append(success).append(response);
     });
 
@@ -31,7 +31,7 @@ $(document).ready(function() {
     // if pgpForm is not connected after 10sec we consider it absent
     setTimeout(function() {
       if (!pgpFormDefined) {
-        const errorMsg = 'OpenPGP Encrypted Form is not supported. Please install mailvelope and add this domain as an email provider.';
+        const errorMsg = 'OpenPGP Encrypted Form is not supported. Please install Mailvelope and add this domain as an authorized.';
         onError(errorMsg);
       } else {
         $(pgpForm).addClass('defined');

@@ -1,4 +1,5 @@
 "use strict";
+
 var express = require('express');
 var router = express.Router();
 var session;
@@ -10,10 +11,6 @@ router.get('/', function(req, res) {
 
 router.get('/manual', function(req, res) {
   res.render('manual', { title: 'Mailvelope Manual API Test' });
-});
-
-router.get('/settings', function(req, res) {
-  res.render('settings', { title: 'Mailvelope Manual API Test' });
 });
 
 router.get('/unit', function(req, res) {

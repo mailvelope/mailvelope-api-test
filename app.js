@@ -30,6 +30,7 @@ app.use('/', routes);
 app.use('/manual', routes);
 app.use('/unit', routes);
 app.use('/form', routes);
+app.use('/wc', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -44,11 +44,6 @@ function init() {
     initEditor({restoreDraft: true, signAndEncrypt: true});
   });
 
-  $('.panel .nav-tabs a').click(function (e) {
-    e.preventDefault();
-    $(this).tab('show')
-  });
-
   $('[data-toggle=tooltip]').tooltip();
 
   var keyring = null;

@@ -17,6 +17,10 @@ router.get('/unit', function(req, res) {
   res.render('unit', { title: 'Mailvelope API Unit Test' });
 });
 
+router.get('/wc', function(req, res) {
+  res.render('wc', { title: 'Mailvelope Web Components Unit Test' });
+});
+
 // Form test scenarios
 const scenarios = {
   'index':                     'Index',

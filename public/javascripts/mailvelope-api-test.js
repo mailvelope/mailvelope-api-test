@@ -164,6 +164,34 @@ describe('Mailvelope API test', function() {
         });
       });
 
+      it('hasPrivateKey - no parameter', function() {
+        return keyring.hasPrivateKey()
+        .then(function(result) {
+          expect(result).to.be.true;
+        });
+      });
+
+      it('hasPrivateKey - query with fingerprint property', function() {
+        return keyring.hasPrivateKey({fingerprint: 'aa1e01774bdf7d76a45bdc2df11db1250c3c3f1b'})
+        .then(function(result) {
+          expect(result).to.be.true;
+        });
+      });
+
+      it('hasPrivateKey - query with email property', function() {
+        return keyring.hasPrivateKey({email: 'test@mailvelope.com'})
+        .then(function(result) {
+          expect(result).to.be.true;
+        });
+      });
+
+      it('hasPrivateKey - query with unknown email', function() {
+        return keyring.hasPrivateKey({email: 'unknown@mailvelope.com'})
+        .then(function(result) {
+          expect(result).to.be.false;
+        });
+      });
+
       it('addSyncHandler', function() {
 
         var syncHandlerObj = {

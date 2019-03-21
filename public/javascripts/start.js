@@ -1,7 +1,6 @@
 
-$(document).ready(function() {
-
-  $.get('../data/key.asc', function(key) {
+function init() {
+  $.get('../data/key.asc', key => {
     var intro = '\n => Open the Mailvelope settings, switch to keyring \'demo.mailvelope.com (test.user)\' and import the key below before starting the test\n\n';
     intro += key;
     $('#intro').val(intro);
@@ -11,13 +10,18 @@ $(document).ready(function() {
   if (typeof mailvelope !== 'undefined') {
     initKeyring();
   } else {
-    window.addEventListener('mailvelope', initKeyring.bind(null, null), false);
+    window.addEventListener('mailvelope', initKeyring);
   }
+}
 
-  function initKeyring() {
-    mailvelope.createKeyring('test.user').catch(function() {
-      // KEYRING_ALREADY_EXISTS
-    });
-  }
+function initKeyring() {
+  mailvelope.createKeyring('test.user')
+  .then(keyring => {
+    $.get('../data/keyring_logo.base64', logo => keyring.setLogo(`data:image/png;base64,${logo}`, 1));
+  })
+  .catch(() => {
+    // KEYRING_ALREADY_EXISTS
+  });
+}
 
-}); 
+$(document).ready(init);

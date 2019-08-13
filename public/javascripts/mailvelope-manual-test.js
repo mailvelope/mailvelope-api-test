@@ -455,6 +455,16 @@ function init() {
       })
   });
 
+  $('#showDefaultKeyBtn').on('click', function() {
+    keyring.openSettings({showDefaultKey: true})
+      .then(function(result) {
+        console.log('keyring.openSettings({showDefaultKey: true}) success', result);
+      })
+      .catch(function(error) {
+        console.log('keyring.openSettings({showDefaultKey: true}) error', error);
+      })
+  });
+
   $('#openIframeSettingsBtn').on('click', function() {
     console.log('#openIframeSettingsBtn click');
 

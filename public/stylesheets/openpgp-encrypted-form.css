@@ -2,32 +2,32 @@
  * Generic messages
  */
 .message {
-    padding:1em;
+    padding: 1em;
 }
 html.no-js .no-js.message {
-    display:block;
+    display: block;
 }
 html .no-js.message {
-    display:none;
+    display: none;
 }
 
 /**
  * Default element style
  */
 openpgp-encrypted-form {
-    display:block;
+    display: block;
     width: 100%;
-    min-height:3em;
+    min-height: 4em;
 }
 openpgp-encrypted-form form {
-    display:none;
+    display: none;
 }
 
 /**
  * Pre-style element prior registration
  */
 openpgp-encrypted-form:after {
-    position:absolute;
+    position: absolute;
     content: 'Loading...';
 }
 
@@ -35,7 +35,7 @@ openpgp-encrypted-form:after {
  * Pre-style element prior Mailvelope API available
  */
 openpgp-encrypted-form.loading:after {
-    position:absolute;
+    position: absolute;
     content: 'Loading...';
 }
 
@@ -46,6 +46,6 @@ openpgp-encrypted-form.loading:after {
 .no-js openpgp-encrypted-form:after,
 openpgp-encrypted-form.defined:after,
 openpgp-encrypted-form.error:after {
-    position:absolute;
+    position: absolute;
     content: '';
 }

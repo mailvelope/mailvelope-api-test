@@ -53,6 +53,13 @@ describe('Mailvelope API test', function() {
         }).catch(done);
       });
 
+      it('getKeyring - access main keyring', function(done) {
+        mailvelope.getKeyring().then(function(kr) {
+          expect(kr).to.exist;
+          done();
+        }).catch(done);
+      });
+
       it('getKeyring - no keyring found error', function(done) {
         mailvelope.getKeyring(randomId).then(function(kr) {
           throw new Error('Should not enter then method.');

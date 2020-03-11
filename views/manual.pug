@@ -154,6 +154,15 @@ html
             button#openIframeSettingsBtn.btn.btn-default Open Settings in iFrame
             button#showDefaultKeyBtn.btn.btn-default Show default key in Tab
 
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title Add domain to authorized domain list
+        .panel-body
+          p Request inclusion in the authorized domain list of Mailvelope. A confirmation popup will be displayed to the user. Please delete the default entry "Mailvelope Demo" from authorized domains before testing.
+        .panel-footer
+          .btn-group(role=group)
+            button#addDomain.btn.btn-default Add domain
+
       #disconnectModal.modal.fade(tabindex="-1" role="dialog")
         .modal-dialog(role="document")
           .modal-content

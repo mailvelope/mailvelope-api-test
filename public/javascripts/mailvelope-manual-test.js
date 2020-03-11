@@ -9,6 +9,7 @@ $(document).ready(function() {
     $('#newVersion').val(event.detail.version);
     $('#disconnectModal').modal('show');
   }, false);
+  initAddDomain();
 });
 
 var pgp_msg;
@@ -501,6 +502,12 @@ function init() {
             console.log('mailvelope.createKeyring(test@gmx.de-mail.de) error', error);
           });
       });
+  });
+}
+
+function initAddDomain() {
+  $('#addDomain').on('click', function() {
+    $('body').append('<iframe style="display: none;" src="https://api.mailvelope.com/authorize-domain/?api=true" />')
   });
 }
 

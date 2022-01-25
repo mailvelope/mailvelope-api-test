@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "chai": "4.3.4",
-    "express": "4.17.1",
-    "express-session": "1.17.1",
+    "express": "4.17.2",
+    "express-session": "1.17.2",
     "jquery": "3.6.0",
     "mocha": "8.4.0",
     "pug": "3.0.2"

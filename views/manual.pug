@@ -2,176 +2,156 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-switch.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="javascripts/jquery.min.js")
-    script(src="javascripts/bootstrap.min.js")
-    script(src="javascripts/bootstrap-switch.min.js")
+    script(src="javascripts/bootstrap.bundle.min.js")
     script(src="javascripts/mailvelope-manual-test.js")
   body
-    .container
-      .row
-        .col-sm-8
-          h2 Manual Tests
-        .col-sm-4
-          p.text-right
-            a.btn.btn-default(href="/") Back to start page
-
-      p
-        .btn-group
-          button#clearBtn.btn.btn-default Clear
-          button#initEditorBtn.btn.btn-default Init editor
-          button#restoreDraftBtn.btn.btn-default Restore draft
-
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title Encrypt message:
-        .panel-body
-          .row
-            .col-sm-6
-              .form-group
+    .container.py-3
+      header
+        .d-flex.flex-column.flex-md-row.align-items-center.pb-3.mb-4.border-bottom
+          a.d-flex.align-items-center.link-body-emphasis.text-decoration-none(href="/manual")
+            span.fs-4 Manual Tests
+          nav.d-inline-flex.mt-2.mt-md-0.ms-md-auto
+            a.me-3.py-2.link-body-emphasis.text-decoration-none(href="/") Back to start page
+      main
+        .row.row-cols-1.row-cols-md-1.mb-3
+          .col
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Encrypt message
+              .card-body
+                .row
+                  .col-sm-6
+                    .input-group
+                      span.input-group-text From:
+                      input#senderAddress.form-control(value="test@mailvelope.com")
+                  .col-sm-6
+                    .input-group
+                      span.input-group-text To:
+                      input#toAddress.form-control(value="test@mailvelope.com")
+                .btn-group.mt-4(role="group")
+                  button#clearBtn.btn.btn-outline-primary(type="button") Clear
+                  button#initEditorBtn.btn.btn-outline-primary(type="button") Init editor
+                  button#restoreDraftBtn.btn.btn-outline-primary(type="button") Restore draft
+                #editorCont(style="height: 450px;margin:1em 0")
+                .button-toolbar
+                  button#encryptBtn.btn.btn-primary(type="button") Encrypt
+                  button#draftBtn.btn.btn-secondary(type="button") Create draft
+                  .form-check.form-check-inline.form-switch
+                    input#toggleEditor.form-check-input(type="checkbox", role="switch", checked)
+                    label.form-check-label(for="toggleEditor") Sign message
+              .card-footer
                 .input-group
-                  span.input-group-addon From:
-                  input#senderAddress(value="test@mailvelope.com").form-control
-            .col-sm-6
-              .form-group
+                  label.input-group-text Time (ms):
+                  input#encryptTime.form-control(disabled)
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Decrypt message
+              .card-body
+                textarea#armored_msg.form-control.mb-3(rows="12", style="width: 100%")
+                .button-toolbar
+                  button#decryptBtn.btn.btn-primary(type="button") Decrypt
+              .card-footer
                 .input-group
-                  span.input-group-addon To:
-                  input#toAddress(value="test@mailvelope.com").form-control
-
-          #editorCont(style="height: 450px;margin:1em 0")
-          .form-group
-            input#toggleEditor(type="checkbox", name="my-checkbox", checked)
-            button#encryptBtn.btn.btn-primary Encrypt
-            button#draftBtn.btn.btn-default Create draft
-
-        .panel-footer
-          .form-group
-            .input-group
-              span.input-group-addon Time in (ms):
-              input#encryptTime(disabled).form-control
-        .panel-heading
-          h3.panel-title Decrypt message:
-        .panel-body
-          .form-group
-            textarea#armored_msg(rows="12", style="width: 100%").form-control
-          .form-group
-            .input-group
-              span.input-group-btn
-                button#decryptBtn.btn.btn-primary Decrypt
-              span.input-group-addon Time in (ms):
-              input#decryptTime(disabled).form-control
-        .panel-heading
-          h3.panel-title Decrypted message in DisplayContainer
-        .panel-body
-          #display_cont(style="height: 450px")
-
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title Import public key:
-        .panel-body
-          .form-group
-            textarea#armored_key(rows="12", style="width: 100%").form-control
-          .form-group
-            .input-group
-              span.input-group-btn
-                button#importBtn.btn.btn-primary Import
-              span.input-group-addon Result status:
-              input#importStatus(disabled).form-control
-
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title Backup server sync:
-        .panel-body
-          .form-group
-            textarea#backupServerSync(rows="12", style="width: 100%").form-control
-        .panel-footer
-          .form-group
-            label.checkbox-inline
-              input#downloadBackupFail(type="checkbox")
-              | Download backup fail
-            label.checkbox-inline
-              input#uploadBackupFail(type="checkbox")
-              | Upload backup fail
-          .form-group
-            .input-group
-              span.input-group-addon eTag:
-              input#eTag.form-control
-              span.input-group-btn
-                button#generateEtagBtn.btn.btn-primary generate
-
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title KeyGen &amp; PrivateKeyBackup Generator:
-        .panel-body
-          #private_key_backup_cont(style="height: 350px;margin-bottom:1em")
-        .panel-footer
-          .btn-group(role=group)
-            button#createKeyGenGeneratorBtn.btn.btn-primary create KeyGen Container
-            button#generateGeneratorBtn.btn.btn-default(disabled) generate
-            button#createKeyBackupContainerBtn.btn.btn-default create Backup
-            button#recreateKeyBackupContainerBtn.btn.btn-default recreate Backup
-          .btn-group(role=group)
-            button#restoreBackupContainerBtn.btn.btn-default restore Backup
-            button#restorePasswordContainerBtn.btn.btn-default restore Password
-          .row
-            .col-lg-2
-              .checkbox
-                label
-                  input#confirmKeyGen(type="checkbox")
-                  | Confirm key upload
-              .checkbox
-                label
-                  input#rejectKeyGen(type="checkbox")
-                  | Reject key upload
-              .input-group
-                input#confirmDelay.form-control(type="text")
-                span.input-group-addon ms
-
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title Check if keyring has private key for given fingerprint:
-        .panel-body
-          .alert.alert-info(role=alert) Copy the fingerprint from your mailvelope extension
-          .form-group
-            label.control-label Fingerprint
-            input#fingerprintInput(placeholder="Fingerprint without spaces").form-control
-          .form-group
-            output#hasPrivateKey_cont.form-control
-        .panel-footer
-          .btn-group(role=group)
-            button#hasPrivateKeyBtn.btn.btn-success Check
-
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title Open Settings:
-        .panel-body
-          div(id="settings", style="height: 700px; width: 100%")
-        .panel-footer
-          .btn-group(role=group)
-            button#openSettingsBtn.btn.btn-default Open Settings in Tab
-            button#openIframeSettingsBtn.btn.btn-default Open Settings in iFrame
-            button#showDefaultKeyBtn.btn.btn-default Show default key in Tab
-
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title Add domain to authorized domain list
-        .panel-body
-          p Request inclusion in the authorized domain list of Mailvelope. A confirmation popup will be displayed to the user. Please delete the default entry "Mailvelope Demo" from authorized domains before testing.
-        .panel-footer
-          .btn-group(role=group)
-            button#addDomain.btn.btn-default Add domain
-
-      #disconnectModal.modal.fade(tabindex="-1" role="dialog")
-        .modal-dialog(role="document")
+                  label.input-group-text Time in (ms):
+                  input#decryptTime.form-control(disabled)
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Decrypted message in DisplayContainer
+              .card-body
+                #display_cont(style="height: 450px")
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Import public key
+              .card-body
+                textarea#armored_key.form-control.mb-3(rows="12", style="width: 100%")
+                .button-toolbar
+                  button#importBtn.btn.btn-primary(type="button") Import
+              .card-footer
+                .input-group
+                  label.input-group-text Result status:
+                  input#importStatus.form-control(disabled)
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Backup server sync
+              .card-body
+                textarea#backupServerSync.form-control.mb-3(rows="12", style="width: 100%")
+                .form-check.form-check-inline
+                  input#downloadBackupFail.form-check-input(type="checkbox")
+                  label.form-check-label(for="downloadBackupFail") Download backup fail
+                .form-check.form-check-inline
+                  input#uploadBackupFail.form-check-input(type="checkbox")
+                  label.form-check-label(for="uploadBackupFail") Upload backup fail
+              .card-footer
+                .input-group
+                  label.input-group-text eTag:
+                  input#eTag.form-control
+                  button#generateEtagBtn.btn.btn-primary(type="button") Generate
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal KeyGen &amp; PrivateKeyBackup Generator
+              .card-body
+                #private_key_backup_cont.mb-1(style="height: 350px")
+                .btn-group.mt-4(role="group")
+                  button#createKeyGenGeneratorBtn.btn.btn-outline-primary(type="button") create KeyGen Container
+                  button#generateGeneratorBtn.btn.btn-outline-secondary(type="button", disabled) generate
+                  button#createKeyBackupContainerBtn.btn.btn-outline-secondary(type="button") create Backup
+                  button#recreateKeyBackupContainerBtn.btn.btn-outline-secondary(type="button") recreate Backup
+                .btn-group.mt-4(role="group")
+                  button#restoreBackupContainerBtn.btn.btn-outline-secondary(type="button") restore Backup
+                  button#restorePasswordContainerBtn.btn.btn-outline-secondary(type="button") restore Password
+                .form-check.mt-4
+                  input#confirmKeyGen.form-check-input(type="checkbox")
+                  label.form-check-label(for="confirmKeyGen") Confirm key upload
+                .form-check
+                  input#rejectKeyGen.form-check-input(type="checkbox")
+                  label.form-check-label(for="rejectKeyGen") Reject key upload
+              .card-footer
+                .input-group
+                  label.input-group-text Time (ms):
+                  input#confirmDelay.form-control(disabled)
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Check if keyring has private key for given fingerprint
+              .card-body
+                .alert.alert-info(role="alert") Copy the fingerprint from your mailvelope extension
+                .mb-3
+                  label.form-label(for="fingerprintInput") Fingerprint
+                  input#fingerprintInput.form-control(type="text")
+                .button-toolbar
+                  button#hasPrivateKeyBtn.btn.btn-primary(type="button") Check
+              .card-footer
+                .input-group
+                  label.input-group-text Result:
+                  input#hasPrivateKey_cont.form-control(disabled)
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Open Settings
+              .card-body
+                #settings(style="height: 700px; width: 100%")
+              .card-footer
+                .btn-group(role="group")
+                  button#openSettingsBtn.btn.btn-outline-primary(type="button") Open Settings in Tab
+                  button#openIframeSettingsBtn.btn.btn-outline-primary(type="button") Open Settings in iFrame
+                  button#showDefaultKeyBtn.btn.btn-outline-primary(type="button") Show default key in Tab
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Add domain to authorized domain list
+              .card-body
+                p Request inclusion in the authorized domain list of Mailvelope. A confirmation popup will be displayed to the user. Please delete the default entry "Mailvelope Demo" from authorized domains before testing.
+              .card-footer
+                button#addDomain.btn.btn-primary(type="button") Add domain
+      #disconnectModal.modal.fade(tabindex="-1")
+        .modal-dialog
           .modal-content
             .modal-header
-              h4.modal-title Disconnect Event
+              h5.modal-title Disconnect Event
             .modal-body
               p Event "mailvelope-disconnect" triggered due to extension update
-              .form-group
-                label.control-label New version
-                input#newVersion.form-control
+              .mb-3
+                label.form-label New version
+                input#newVersion.form-control(disabled)
             .modal-footer
-              button(type="button" class="btn btn-default" data-dismiss="modal") Close
+              button.btn.btn-secondary(type="button", data-bs-dismiss="modal") Close

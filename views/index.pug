@@ -2,22 +2,24 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="javascripts/jquery.min.js")
     script(src="javascripts/start.js")
   body
-    #mocha
-    .container
-      h2 Mailvelope Client API Tests
-
-      .panel.panel-default#setup
-        .panel-heading
-          h3.panel-title Automatic API test
-        .panel-body
-          .form-group
-            textarea#intro.form-control(rows="12", style="width: 100%")
-        .panel-footer
-          .btn-group(role=group)
-            a#startBtn.btn.btn-primary(href="/unit") Start API tests
-            a.btn.btn-default(href="/manual") Switch to manual tests
+    .container.py-3
+      header
+        .d-flex.flex-column.flex-md-row.align-items-center.pb-3.mb-4.border-bottom
+          a.d-flex.align-items-center.link-body-emphasis.text-decoration-none(href="/")
+            span.fs-4 Mailvelope Client API Tests
+          nav.d-inline-flex.mt-2.mt-md-0.ms-md-auto
+            a.me-3.py-2.link-body-emphasis.text-decoration-none(href="/manual") Manual Tests
+      main
+        .row.row-cols-1.row-cols-md-1.mb-3
+          .col
+            .card.mb-4.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Automatic API Test
+              .card-body
+                textarea#intro.form-control.mb-4(rows="16", style="width: 100%")
+                a.btn.btn-lg.btn-primary(role="button", href="/unit") Start API Tests

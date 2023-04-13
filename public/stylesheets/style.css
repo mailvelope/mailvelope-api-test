@@ -6,30 +6,3 @@ body {
 a {
   color: #00B7FF;
 }
-
-.panel .panel-body .navbar-static-top {
-  margin-top: -15px;
-  margin-left: -15px;
-  margin-right: -15px;
-}
-
-.btn-group {
-  margin-bottom: .5em;
-}
-
-.bootstrap-switch {
-  margin-right: 1em;
-}
-
-/** Page related styles */
-.nav {
-    margin:2em 0;
-}
-.nav li {
-    border:1px solid #EFEFEF;
-    margin:0 .5em .5em 0;
-    float:left;
-}
-.nav .selected {
-    background:#EFEFEF;
-}

@@ -1,18 +1,17 @@
 {
   "name": "mailvelope-api-test",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "bootstrap": "3.4.1",
-    "bootstrap-switch": "github:Bttstrp/bootstrap-switch#2b316be8001254ef9f6e229144b625c4674560cb",
-    "chai": "4.3.6",
-    "express": "4.18.1",
+    "bootstrap": "5.2.3",
+    "chai": "4.3.7",
+    "express": "4.18.2",
     "express-session": "1.17.3",
-    "jquery": "3.6.0",
-    "mocha": "10.0.0",
+    "jquery": "3.6.4",
+    "mocha": "10.2.0",
     "pug": "3.0.2"
   }
 }

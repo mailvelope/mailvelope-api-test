@@ -2,77 +2,73 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-switch.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="javascripts/jquery.min.js")
-    script(src="javascripts/bootstrap.min.js")
-    script(src="javascripts/bootstrap-switch.min.js")
+    script(src="javascripts/bootstrap.bundle.min.js")
     script(src="javascripts/mailvelope-wc-test.js")
   body
-    .container
-      .row
-        .col-sm-8
-          h2 Web Components Tests
-        .col-sm-4
-          p.text-right
-            a.btn.btn-default(href="/") Back to start page
-
-      p
-        .btn-group
-          button#clearBtn.btn.btn-default Clear
-          button#restoreDraftBtn.btn.btn-default Restore draft
-
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title Encrypt message:
-        .panel-body
-          .row
-            .col-sm-6
-              .form-group
+    .container.py-3
+      header
+        .d-flex.flex-column.flex-md-row.align-items-center.pb-3.mb-4.border-bottom
+          a.d-flex.align-items-center.link-body-emphasis.text-decoration-none(href="/wc")
+            span.fs-4 Web Components Tests
+          nav.d-inline-flex.mt-2.mt-md-0.ms-md-auto
+            a.me-3.py-2.link-body-emphasis.text-decoration-none(href="/") Back to start page
+      main
+        .row.row-cols-1.row-cols-md-1.mb-3
+          .col
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Encrypt message
+              .card-body
+                .row
+                  .col-sm-6
+                    .input-group
+                      span.input-group-text From:
+                      input#senderAddress.form-control(value="test@mailvelope.com")
+                  .col-sm-6
+                    .input-group
+                      span.input-group-text To:
+                      input#toAddress.form-control(value="test@mailvelope.com")
+                .btn-group.mt-4(role="group")
+                  button#clearBtn.btn.btn-outline-primary(type="button") Clear
+                  button#restoreDraftBtn.btn.btn-outline-primary(type="button") Restore draft
+                #editorCont(style="height: 450px;margin:1em 0")
+                .button-toolbar
+                  button#encryptBtn.btn.btn-primary(type="button") Encrypt
+                  button#draftBtn.btn.btn-secondary(type="button") Create draft
+                  .form-check.form-check-inline.form-switch
+                    input#toggleEditor.form-check-input(type="checkbox", role="switch", checked)
+                    label.form-check-label(for="toggleEditor") Sign message
+              .card-footer
                 .input-group
-                  span.input-group-addon From:
-                  input#senderAddress(value="test@mailvelope.com").form-control
-            .col-sm-6
-              .form-group
+                  label.input-group-text Time (ms):
+                  input#encryptTime.form-control(disabled)
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Decrypt message
+              .card-body
+                .button-toolbar
+                  button#decryptBtn.btn.btn-primary(type="button") Decrypt
+              .card-footer
                 .input-group
-                  span.input-group-addon To:
-                  input#toAddress(value="test@mailvelope.com").form-control
-
-          #editorCont(style="height: 450px;margin:1em 0")
-          .form-group
-            input#toggleEditor(type="checkbox" name="my-checkbox" checked)
-            button#encryptBtn.btn.btn-primary Encrypt
-            button#draftBtn.btn.btn-default Create draft
-
-        .panel-footer
-          .form-group
-            .input-group
-              span.input-group-addon Time in (ms):
-              input#encryptTime(disabled).form-control
-        .panel-heading
-          h3.panel-title Decrypt message:
-        .panel-body
-          .form-group
-            .input-group
-              span.input-group-btn
-                button#decryptBtn.btn.btn-primary Decrypt
-              span.input-group-addon Time in (ms):
-              input#decryptTime(disabled).form-control
-        .panel-heading
-          h3.panel-title Decrypted message in openpgp-email-read component
-        .panel-body
-          #display_cont(style="height: 450px")
-
-      #disconnectModal.modal.fade(tabindex="-1" role="dialog")
-        .modal-dialog(role="document")
+                  label.input-group-text Time in (ms):
+                  input#decryptTime.form-control(disabled)
+            .card.mb-5.rounded-3.shadow-sm
+              .card-header.py-3
+                h4.my-0.fw-normal Decrypted message in openpgp-email-read component
+              .card-body
+                #display_cont(style="height: 450px")
+      #disconnectModal.modal.fade(tabindex="-1")
+        .modal-dialog
           .modal-content
             .modal-header
-              h4.modal-title Disconnect Event
+              h5.modal-title Disconnect Event
             .modal-body
               p Event "mailvelope-disconnect" triggered due to extension update
-              .form-group
-                label.control-label New version
-                input#newVersion.form-control
+              .mb-3
+                label.form-label New version
+                input#newVersion.form-control(disabled)
             .modal-footer
-              button(type="button" class="btn btn-default" data-dismiss="modal") Close
+              button.btn.btn-secondary(type="button", data-bs-dismiss="modal") Close

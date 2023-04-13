@@ -45,8 +45,6 @@ function init() {
     initEditor({restoreDraft: true, signAndEncrypt: true});
   });
 
-  $('[data-toggle=tooltip]').tooltip();
-
   var keyring = null;
   var senderAddress = 'test@mailvelope.com';
   var recipient = 'test@mailvelope.com';
@@ -228,11 +226,8 @@ function init() {
     });
   }
 
-  $('#toggleEditor').bootstrapSwitch({
-    labelText: 'Sign',
-    onSwitchChange: function(evt, state) {
-      initEditor({signAndEncrypt: state});
-    }
+  $('#toggleEditor').on('click', function() {
+    initEditor({signAndEncrypt: $(this).is(':checked')});
   });
 
   $('#generateEtagBtn').on('click', function() {
@@ -281,12 +276,12 @@ function init() {
 
         $('#generateGeneratorBtn')
           .removeAttr('disabled')
-          .addClass('btn-success')
+          .addClass('btn-outline-success')
           .on('click', function() {
 
             $('#generateGeneratorBtn')
               .attr('disabled', true)
-              .removeClass('btn-success');
+              .removeClass('btn-outline-success');
 
             var confirm = $('#confirmKeyGen').prop('checked');
             var rejectKey = $('#rejectKeyGen').prop('checked');
@@ -310,14 +305,14 @@ function init() {
                 $('#private_key_backup_cont').empty();
                 $('#generateGeneratorBtn')
                   .removeAttr('disabled')
-                  .addClass('btn-success');
+                  .addClass('btn-outline-success');
               })
               .catch(function(error) {
                 console.log('generator.generate error', error);
 
                 $('#generateGeneratorBtn')
                   .removeAttr('disabled')
-                  .addClass('btn-success');
+                  .addClass('btn-outline-success');
               });
           });
       })
@@ -435,13 +430,13 @@ function init() {
   $('#hasPrivateKeyBtn').on('click', function() {
     var fingerprint = $('#fingerprintInput').val();
 
-    keyring.hasPrivateKey(fingerprint)
+    keyring.hasPrivateKey(fingerprint.replaceAll(' ', ''))
       .then(function(result) {
         console.log('keyring.hasPrivateKey success', result);
         if (result) {
-          $('#hasPrivateKey_cont').html('TRUE');
+          $('#hasPrivateKey_cont').val('TRUE');
         } else {
-          $('#hasPrivateKey_cont').html('FALSE');
+          $('#hasPrivateKey_cont').val('FALSE');
         }
       })
   });

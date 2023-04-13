@@ -35,13 +35,6 @@ function init() {
     $('#encryptTime').val('');
     initEditor({restoreDraft: true, signAndEncrypt: true});
   });
-  $('[data-toggle=tooltip]').tooltip();
-  $('#toggleEditor').bootstrapSwitch({
-    labelText: 'Sign',
-    onSwitchChange(evt, state) {
-      initEditor({signAndEncrypt: state});
-    }
-  });
   $('#encryptBtn').on('click', () => {
     console.log('encryptBtn click');
     let t0 = performance.now();

@@ -1,5 +1,5 @@
-ul.nav
+ul.nav.nav-pills.mb-5
   each val, index in scenarios
-    li
-      - var select=null; if (index == scenario) select='selected';
-      a(href=index class=select) #{val}
+    li.nav-item
+      - var select=null; if (index == scenario) select='active';
+      a.nav-link(href=index class=select) #{val}

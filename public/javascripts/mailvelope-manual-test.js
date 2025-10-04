@@ -169,6 +169,7 @@ function init() {
   function initEditor(options) {
     var $encryptBtn = $('#encryptBtn');
     var $draftBtn = $('#draftBtn');
+    var $signBtn = $('#signBtn');
     var $editorCont = $('#editorCont');
     var $encryptTime = $('#encryptTime');
     var $armored_msg = $('#armored_msg');
@@ -178,6 +179,7 @@ function init() {
     $editorCont.empty();
     $encryptBtn.off('click');
     $draftBtn.off('click');
+    $signBtn.off('click');
     $armored_msg.val('');
     $encryptTime.val('');
 
@@ -221,6 +223,19 @@ function init() {
           })
           .catch(function(error) {
             console.log('editor.createDraft() error', error);
+          });
+      });
+      $signBtn.on('click', function() {
+        console.log('signBtn click');
+        var t0 = performance.now();
+        editor.sign()
+          .then(function(armored) {
+            console.log('editor.sign() success', armored);
+            $encryptTime.val(parseInt(performance.now() - t0));
+            $armored_msg.val(armored);
+          })
+          .catch(function(error) {
+            console.log('editor.sign() error', error);
           });
       });
     });
